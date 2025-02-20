@@ -1,0 +1,65 @@
+@use "../../variables.module" as v;
+@use "../../mixins" as m;
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formField {
+  margin-top: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input {
+  min-width: 400px;
+  min-height: 30px;
+
+  padding: 10px;
+
+  border-radius: 20px;
+  border: 1px solid v.$border-color;
+  background-color: rgba(11, 209, 209, 0.3);
+
+  @include m.text-fontsize-medium;
+  color: v.$white;
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid v.$blue;
+}
+
+.input::placeholder {
+  color: white;
+}
+
+.button {
+  min-height: 74px;
+  min-width: 421px;
+
+  @include m.text-fontsize-medium;
+  color: v.$blue;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: v.$dark-grey;
+  border: none;
+  border-radius: 30px;
+
+  @include m.hover {
+    cursor: pointer;
+    box-shadow: v.$shadow;
+    border: 1px solid v.$blue;
+  }
+}
+
+.error {
+  @include m.text-fontsize-small;
+  color: v.$red;
+}

@@ -1,0 +1,52 @@
+@use "../../variables" as v;
+@use "../../mixins" as m;
+
+.login {
+  &__form {
+    padding-top: 30px;
+    min-width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  &__input {
+    min-width: 421px;
+    padding: 15px;
+
+    border-radius: 30px;
+    border: 1px solid v.$border-color;
+    background-color: transparent;
+
+    @include m.text-fontsize-large;
+    color: v.$text-color;
+  }
+
+  &__input:focus {
+    outline: none;
+    border: 1px solid v.$blue;
+  }
+
+  &__btn {
+    min-height: 74px;
+    min-width: 421px;
+
+    @include m.text-fontsize-large;
+    color: v.$white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: transparent;
+    border: none;
+    border-radius: 30px;
+
+    @include m.hover {
+      cursor: pointer;
+      box-shadow: v.$shadow;
+    }
+  }
+}

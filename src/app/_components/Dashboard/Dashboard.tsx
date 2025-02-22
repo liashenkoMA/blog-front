@@ -1,48 +1,47 @@
 "use client";
 
-import styles from "./dashboard.module.scss";
+import "./dashboard.scss";
 import Image from "next/image";
 import { useState } from "react";
 
 import mainsidebar from "@/app/_images/mainsidebar.png";
 import logpassimg from "@/app/_images/logpasssidebar.png";
-import ChangeLogPassForm from "../ChangeLogPassForm/ChangeLogPassForm";
 import ChangeSocialForm from "../ChangeSocialForm/ChangeSocialForm";
 
 export default function Dashboard() {
   const [active, setActive] = useState("Main");
 
   return (
-    <>
-      <aside className={styles.sidebar}>
-        <ol className={styles.sidebar__lists}>
-          <li className={styles.sidebar__list}>
+    <main className="content">
+      <aside className="sidebar">
+        <ol className="sidebar__lists">
+          <li className="sidebar__list">
             <button
               type="button"
-              className={styles.sidebar__button}
+              className="sidebar__btn"
               onClick={() => setActive("Main")}
             >
               <Image
                 src={mainsidebar}
                 width={25}
                 height={25}
-                className={styles.sidebar__img}
+                className="sidebar__img"
                 alt="Иконка главной"
               ></Image>
               Главная
             </button>
           </li>
-          <li className={styles.sidebar__list}>
+          <li className="sidebar__list">
             <button
               type="button"
-              className={styles.sidebar__button}
+              className="sidebar__btn"
               onClick={() => setActive("LogPass")}
             >
               <Image
                 src={logpassimg}
                 width={25}
                 height={25}
-                className={styles.sidebar__img}
+                className="sidebar__img"
                 alt="Иконка главной"
               ></Image>
               Изменить логин/пароль
@@ -50,10 +49,10 @@ export default function Dashboard() {
           </li>
         </ol>
       </aside>
-      <section className={styles.mainPanel}>
-        {active === "Main" && <ChangeSocialForm />}
-        {active === "LogPass" && <ChangeLogPassForm />}
+      <section className="dashboard">
+        {active === "Main" && <div>Главная</div>}
+        {active === "LogPass" && <ChangeSocialForm />}
       </section>
-    </>
+    </main>
   );
 }

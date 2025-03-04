@@ -44,7 +44,7 @@ export default function Dashboard() {
                 className="sidebar__img"
                 alt="Иконка главной"
               ></Image>
-              Изменить логин/пароль
+              Изменить данные
             </button>
           </li>
         </ol>

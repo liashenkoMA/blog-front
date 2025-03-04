@@ -1,0 +1,57 @@
+@use "../../variables" as v;
+@use "../../mixins" as m;
+
+.changesocial {
+  &__form {
+    min-width: 350px;
+    padding: 20px;
+
+    background-color: rgb(19, 28, 49, 0.7);
+
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__input {
+    padding: 10px;
+    min-width: 300px;
+
+    background-color: transparent;
+
+    border: 1px solid v.$blue;
+    border-radius: 15px;
+
+    @include m.text-fontsize-xx-small;
+    color: v.$white;
+  }
+
+  &__input::placeholder {
+    color: v.$white;
+  }
+
+  &__btn {
+    min-width: 250px;
+    min-height: 60px;
+
+    background-color: transparent;
+
+    border: 1px solid v.$blue;
+    border-radius: 15px;
+
+    @include m.text-fontsize-x-small;
+    color: v.$white;
+  }
+
+  &__btn:hover {
+    cursor: pointer;
+    background-color: rgb(15, 23, 42, 0.2);
+  }
+
+  &__btn:active {
+    background-color: rgb(15, 23, 42, 0.6);
+  }
+}

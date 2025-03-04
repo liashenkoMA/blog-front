@@ -24,7 +24,6 @@ export async function login(formData: FormData) {
   }).then((res) => {
     return res.json();
   });
-
   const expires = new Date(Date.now() + 1000 * 1000);
 
   if (res.access_token) {
@@ -33,6 +32,6 @@ export async function login(formData: FormData) {
       httpOnly: true,
     });
   }
-  
+
   return res.error;
 }

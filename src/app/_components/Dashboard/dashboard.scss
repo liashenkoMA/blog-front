@@ -40,7 +40,7 @@
     align-items: center;
     background-color: transparent;
 
-    border: 1px solid;
+    border: 1px solid v.$blue;;
     border-radius: 15px;
 
     @include m.text-fontsize-x-small;

@@ -1,0 +1,36 @@
+@use "../../variables" as v;
+@use "../../mixins" as m;
+
+.menu {
+  &__navigation-links {
+    display: flex;
+    gap: 32px;
+
+    list-style-type: none;
+
+    @include m.media-1439 {
+      margin-left: 0;
+      margin-top: 36px;
+
+      flex-direction: column;
+    }
+  }
+
+  &__navigation-link {
+    @include m.text-fontsize-medium;
+    color: v.$white;
+
+    @include m.hover {
+      color: v.$light-blue;
+    }
+
+    @include m.media-1439 {
+      font-size: 32px;
+      line-height: 20px;
+    }
+  }
+
+  &__navigation-link_type_active {
+    color: v.$light-blue;
+  }
+}

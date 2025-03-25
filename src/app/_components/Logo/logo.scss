@@ -1,0 +1,31 @@
+@use "../../variables" as v;
+@use "../../mixins" as m;
+
+.logo {
+  display: flex;
+
+  @include m.media-1439 {
+    align-items: center;
+  }
+
+  &__image {
+    @include m.media-1439 {
+      width: 58px;
+      height: 32px;
+    }
+  }
+
+  &__description {
+    padding-left: 8px;
+
+    @include m.text-fontsize-large;
+
+    color: v.$white;
+
+    @include m.media-1439 {
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 32px;
+    }
+  }
+}

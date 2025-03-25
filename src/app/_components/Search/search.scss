@@ -1,0 +1,56 @@
+@use "../../mixins" as m;
+@use "../../variables" as v;
+
+.menu {
+  &__search-form {
+    margin: 0px 64px;
+
+    display: flex;
+    align-items: center;
+
+    @include m.media-1439 {
+      margin-top: 64px;
+    }
+  }
+
+  &__form-field {
+    position: relative;
+  }
+
+  &__input {
+    min-width: 204px;
+    min-height: 32px;
+
+    box-sizing: border-box;
+    padding-left: 10px;
+
+    border: none;
+    border-radius: 24px;
+  }
+
+  &__input:focus {
+    outline: none;
+    border: 2px solid v.$blue;
+  }
+
+  &__btn {
+    position: absolute;
+    right: 16px;
+    top: 6px;
+
+    background-image: url(../../_images/icon-search.svg);
+    background-repeat: no-repeat;
+    background-position: left;
+
+    width: 20px;
+    height: 20px;
+
+    border: none;
+    background-color: transparent;
+  }
+
+  &__btn:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+}

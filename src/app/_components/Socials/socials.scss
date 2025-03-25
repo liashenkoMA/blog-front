@@ -1,0 +1,41 @@
+@use "../../variables" as v;
+@use "../../mixins" as m;
+
+.menu {
+  &__socials-links {
+    display: flex;
+    gap: 32px;
+
+    list-style-type: none;
+
+    @include m.media-1439 {
+      flex-direction: column;
+      margin-top: 64px;
+    }
+  }
+
+  &__socials-link {
+    @include m.text-fontsize-x-small;
+    color: v.$white;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    @include m.hover {
+      color: v.$light-blue;
+    }
+  }
+
+  &__position_footer {
+    margin-top: 0;
+
+    @include m.media-1439 {
+      margin-top: 30px;
+    }
+  }
+
+  &__position_homepagehead {
+    margin-top: 30px;
+  }
+}

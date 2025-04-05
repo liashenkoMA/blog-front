@@ -4,7 +4,6 @@
 .menu {
   &__search-form {
     margin: 0px 64px;
-
     display: flex;
     align-items: center;
 
@@ -20,10 +19,8 @@
   &__input {
     min-width: 204px;
     min-height: 32px;
-
     box-sizing: border-box;
     padding-left: 10px;
-
     border: none;
     border-radius: 24px;
   }
@@ -37,14 +34,11 @@
     position: absolute;
     right: 16px;
     top: 6px;
-
     background-image: url(../../_images/icon-search.svg);
     background-repeat: no-repeat;
     background-position: left;
-
     width: 20px;
     height: 20px;
-
     border: none;
     background-color: transparent;
   }

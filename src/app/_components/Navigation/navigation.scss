@@ -5,20 +5,18 @@
   &__navigation-links {
     display: flex;
     gap: 32px;
-
     list-style-type: none;
 
     @include m.media-1439 {
       margin-left: 0;
       margin-top: 36px;
-
       flex-direction: column;
     }
   }
 
   &__navigation-link {
     @include m.text-fontsize-medium;
-    color: v.$white;
+    color: v.$main-text-color;
 
     @include m.hover {
       color: v.$light-blue;

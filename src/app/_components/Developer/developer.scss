@@ -34,16 +34,18 @@
       flex-direction: column;
       align-items: center;
     }
+
+    @include m.media-767 {
+      gap: 0;
+    }
   }
 
   &__contacts {
     min-width: 320px;
     min-height: 520px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     border-radius: 160px 0px;
     border: 4px solid v.$white;
     box-shadow: -4px -4px 2px 0px v.$light-blue;

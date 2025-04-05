@@ -17,10 +17,8 @@
 
   &__description {
     padding-left: 8px;
-
     @include m.text-fontsize-large;
-
-    color: v.$white;
+    color: v.$main-text-color;
 
     @include m.media-1439 {
       font-size: 24px;

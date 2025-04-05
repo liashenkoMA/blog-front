@@ -2,19 +2,13 @@
 @use "../../variables" as v;
 
 .footer {
-  @include m.media-1439 {
-
-  }
-
   &__content {
     margin: 0px auto;
     max-width: 1440px;
     min-height: 170px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     border-top: 1px solid v.$border-color;
 
     @include m.media-1679 {
@@ -42,7 +36,7 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
-    color: v.$white;
+    color: v.$main-text-color;
 
     @include m.media-1439 {
       font-weight: 300;

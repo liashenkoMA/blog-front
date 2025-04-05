@@ -9,7 +9,6 @@
     list-style-type: none;
 
     @include m.media-1439 {
-      flex-direction: column;
       margin-top: 64px;
     }
   }
@@ -30,7 +29,7 @@
   &__position_footer {
     margin-top: 0;
 
-    @include m.media-1439 {
+    @include m.media-767 {
       margin-top: 30px;
     }
   }

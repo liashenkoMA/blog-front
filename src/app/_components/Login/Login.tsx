@@ -4,7 +4,7 @@ import AuthorizationForm from "../AuthorizationForm/AuthorizationForm";
 
 export default function Login() {
   return (
-    <main>
+    <main className="content">
       <section className="login">
         <div className="login__conteiner">
           <h1 className="login__title">Welcome back!</h1>

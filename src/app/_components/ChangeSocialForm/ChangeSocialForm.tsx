@@ -3,7 +3,7 @@
 import "./changeSocialForm.scss";
 
 import React, { useEffect, useState } from "react";
-import { updateUser, userDate } from "@/app/_utils/userApi";
+import { updateUser, userData } from "@/app/_utils/userApi";
 
 export default function ChangeSocialForm() {
   const [telegram, setTelegram] = useState("");
@@ -16,7 +16,7 @@ export default function ChangeSocialForm() {
 
   useEffect(() => {
     function fetchUser() {
-      userDate().then((user) => {
+      userData().then((user) => {
         setTelegram(user.telegram);
         setVk(user.vk);
         setGitHub(user.gitHub);

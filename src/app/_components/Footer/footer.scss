@@ -2,6 +2,10 @@
 @use "../../variables" as v;
 
 .footer {
+  @include m.media-1439 {
+
+  }
+
   &__content {
     margin: 0px auto;
     max-width: 1440px;
@@ -17,7 +21,8 @@
       max-width: 1280px;
     }
 
-    @include m.media-1439 {
+    @include m.media-1439 {    
+      padding: 64px 0px;
       max-width: 768px;
       min-height: 116px;
     }

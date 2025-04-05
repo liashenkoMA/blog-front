@@ -3,14 +3,15 @@
 $white: #ffffff;
 $black: #000000;
 $red: #ff0000;
-$light-blue: #1cc2e7;
-$grey-blue: #94a9c9;
+$aqamarin: #12f7d6;
 $blue: #0ea5ea;
 $dark-blue: #0f172a;
+$light-blue: #1cc2e7;
+$grey-blue: #94a9c9;
 $light-grey: #222f43;
 $grey: #43454d;
 $dark-grey: #131c31;
-$aqamarin: #12f7d6;
+$light-dark-blue: #111c36;
 
 /* Background colors */
 
@@ -29,7 +30,7 @@ $border-color: $light-grey;
 
 $text-gradient: linear-gradient(90deg, #0ea5ea, #12f7d6 51%, #0ea5ea);
 $text-color: $grey-blue;
-
+$main-text-color: $white;
 /* Text size */
 
 $font-size-xx-small: 14px;
@@ -39,6 +40,7 @@ $font-size-medium: 24px;
 $font-size-large: 32px;
 $font-size-x-large: 45px;
 $font-size-xx-large: 64px;
+$font-size-xxx-large: 117px;
 
 $font-weight-light: 300;
 $font-weight-regular: 400;
@@ -54,3 +56,4 @@ $line-height-medium: 32px;
 $line-height-large: 42px;
 $line-height-x-large: 61px;
 $line-height-xx-large: 87px;
+$line-height-xxx-large: 134px;

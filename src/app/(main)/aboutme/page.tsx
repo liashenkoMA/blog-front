@@ -1,3 +1,5 @@
+import AboutMe from "@/app/_components/AboutMe/AboutMe";
+
 export default function Page() {
-  return <h1>Hello blog</h1>;
+  return <AboutMe />;
 }

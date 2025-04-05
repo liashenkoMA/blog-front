@@ -7,7 +7,7 @@ const address = {
   },
 };
 
-export function userDate() {
+export function userData() {
   return fetch(`${address.baseUrl}/user/`, {
     method: "GET",
     credentials: "include",

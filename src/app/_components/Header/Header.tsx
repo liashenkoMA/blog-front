@@ -7,11 +7,10 @@ import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
 import Search from "../Search/Search";
 import Socials from "../Socials/Socials";
-import { useUserContext } from "@/app/_contexts/useContext";
+import { IUser } from "@/app/_interface/interface";
 
-export default function Header() {
+export default function Header({ user }: { user: IUser }) {
   const [isOpen, setIsOpen] = useState(true);
-  const userData = useUserContext();
 
   function isOpenMenu() {
     setIsOpen(!isOpen);
@@ -33,9 +32,9 @@ export default function Header() {
           <Search />
           <Socials
             position={"menu__position_header"}
-            telegram={userData.telegram}
-            vk={userData.vk}
-            git={userData.gitHub}
+            telegram={user.telegram}
+            vk={user.vk}
+            git={user.gitHub}
           />
         </div>
       </div>

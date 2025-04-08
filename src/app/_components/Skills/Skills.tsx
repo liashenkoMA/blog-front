@@ -15,7 +15,6 @@ export default async function Skills() {
     <section className="skills">
       <div className="skills__content">
         <h2 className="skills__title">Навыки</h2>
-
         <ol className="skills__techs">
           <li className="skills__tech">
             <Image

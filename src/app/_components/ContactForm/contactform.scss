@@ -1,0 +1,191 @@
+@use "../../variables" as v;
+@use "../../mixins" as m;
+
+.contactform {
+  width: 100%;
+  padding: 32px 0px;
+
+  &__content {
+    margin: 0 auto;
+    padding: 30px;
+    max-width: 1280px;
+    background-color: v.$background-element-color;
+    border: 1px solid v.$border-color;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+
+    @include m.media-1439 {
+      max-width: 768px;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @include m.media-1023 {
+      max-width: 680px;
+    }
+
+    @include m.media-767 {
+      padding: 30px 5px 10px 5px;
+      max-width: 290px;
+    }
+  }
+
+  &__title {
+    width: 300px;
+    height: 84px;
+    margin-bottom: 64px;
+    border: 4px solid v.$light-blue;
+    border-radius: 40px 0px;
+    background-color: v.$main-background-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include m.text-fontsize-x-large;
+    color: v.$main-text-color;
+
+    @include m.media-767 {
+      width: 224px;
+      height: 68px;
+      margin-bottom: 32px;
+      @include m.text-fontsize-large;
+    }
+  }
+
+  &__conteiner {
+    padding: 24px 40px;
+    border-radius: 40px;
+    border: 1px solid v.$border-color;
+    background-color: v.$main-background-color;
+
+    @include m.media-1439 {
+      min-width: 706px;
+    }
+
+    @include m.media-1023 {
+      min-width: 618px;
+    }
+
+    @include m.media-767 {
+      min-width: 280px;
+      padding: 24px 10px;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__form-inputs {
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &__inputs-contact {
+    display: flex;
+    justify-content: space-between;
+
+    @include m.media-1439 {
+      flex-direction: column;
+    }
+  }
+
+  &__form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    @include m.media-767 {
+      align-items: center;
+    }
+  }
+
+  &__text {
+    padding-bottom: 10px;
+    @include m.text-gradient;
+
+    @include m.media-767 {
+      padding: 0;
+    }
+  }
+
+  &__input {
+    padding: 15px;
+    min-width: 496px;
+    height: 22px;
+    background-color: transparent;
+    border: 1px solid v.$border-color;
+    border-radius: 15px;
+    background-color: v.$background-element-color;
+    color: v.$white;
+    @include m.text-fontsize-x-small;
+    @include m.media-1439 {
+      min-width: 264px;
+    }
+
+    @include m.media-1023 {
+      min-width: 135px;
+    }
+
+    @include m.media-767 {
+      min-width: 246px;
+    }
+  }
+
+  &__input:focus {
+    padding: 15px;
+    outline: none;
+    border: 1px solid v.$blue;
+    border-radius: 15px;
+  }
+
+  &__input-textarea {
+    padding: 15px;
+    max-width: 1136px;
+    resize: vertical;
+    min-height: 250px;
+    border-radius: 30px;
+    border: 1px solid v.$border-color;
+    background-color: v.$background-element-color;
+    @include m.text-fontsize-x-small;
+    @include m.media-1439 {
+      max-width: 706px;
+    }
+
+    @include m.media-1023 {
+      max-width: 680px;
+    }
+
+    @include m.media-767 {
+      max-width: 246px;
+    }
+  }
+
+  &__input-textarea:focus {
+    padding: 15px;
+    border-radius: 30px;
+  }
+
+  &__error {
+    color: v.$red;
+    @include m.text-fontsize-x-small;
+  }
+
+  &__btn {
+    width: 234px;
+    height: 56px;
+    @include m.text-fontsize-small;
+    background-color: v.$light-blue;
+    border: none;
+    border-radius: 80px;
+    @include m.hover {
+      cursor: pointer;
+      box-shadow: v.$shadow;
+    }
+  }
+}

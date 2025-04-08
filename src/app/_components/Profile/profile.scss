@@ -3,7 +3,7 @@
 
 .profile {
   width: 100%;
-  padding: 64px 0px;
+  padding: 64px 0px 32px 0px;
 
   &__content {
     margin: 0 auto;
@@ -17,7 +17,6 @@
 
     @include m.media-1439 {
       max-width: 768px;
-
       flex-direction: column;
       align-items: center;
     }
@@ -51,7 +50,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     @include m.text-fontsize-x-large;
     color: v.$main-text-color;
 

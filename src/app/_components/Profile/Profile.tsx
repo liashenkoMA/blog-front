@@ -33,8 +33,6 @@ export default function Profile() {
                 играть в настолки. Мечтаю хотя бы раз сыграть в DnD. И да, как
                 истинный любитель всего японского, в свободное время учу язык.
               </p>
-              {/*               <p className="profile__text"></p>
-              <p className="profile__text"></p> */}
             </div>
             <p className="profile__html-tag">&lt;/p&gt;</p>
           </div>

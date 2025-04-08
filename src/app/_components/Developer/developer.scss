@@ -33,9 +33,6 @@
     @include m.media-1439 {
       flex-direction: column;
       align-items: center;
-    }
-
-    @include m.media-767 {
       gap: 0;
     }
   }

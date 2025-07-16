@@ -84,7 +84,7 @@ export default async function Skills() {
             />
             <p className="skills__header">React</p>
             <p className="skills__description">
-              NetTracking" is a very powerful Web 2.0 site search engine allows
+              NetTracking is a very powerful Web 2.0 site search engine allows
               you to find email allerts
             </p>
           </li>

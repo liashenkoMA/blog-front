@@ -3,72 +3,63 @@
 import "./changeSocialForm.scss";
 
 import React, { useEffect, useState } from "react";
-import { updateUser, userData } from "@/app/_utils/userApi";
+import { updateUser, getUserData } from "@/app/_utils/userApi";
+import { IUserSocials } from "@/app/_interface/interface";
 
 export default function ChangeSocialForm() {
-  const [telegram, setTelegram] = useState("");
-  const [vk, setVk] = useState("");
-  const [gitHub, setGitHub] = useState("");
-  const [linkedin, setLinkedin] = useState("");
-  const [city, setCity] = useState("");
-  const [yearFooter, setYearFooter] = useState("");
-  const [avatarLink, setAvatarLink] = useState("");
+  const [formData, setFormData] = useState<IUserSocials>({
+    telegram: "",
+    vk: "",
+    gitHub: "",
+    linkedin: "",
+    city: "",
+    yearFooter: "",
+    avatarLink: "",
+  });
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setFormData((data) => ({ ...data, [e.target.name]: e.target.value }));
+  }
 
   useEffect(() => {
     function fetchUser() {
-      userData().then((user) => {
-        setTelegram(user.telegram);
-        setVk(user.vk);
-        setGitHub(user.gitHub);
-        setLinkedin(user.linkedin);
-        setCity(user.city);
-        setYearFooter(`${user.yearFooter}`);
-        setAvatarLink(user.avatarLink);
-      });
+      getUserData()
+        .then((user) => {
+          setFormData({
+            telegram: user.telegram,
+            vk: user.vk,
+            gitHub: user.gitHub,
+            linkedin: user.linkedin,
+            city: user.city,
+            yearFooter: user.yearFooter,
+            avatarLink: user.avatarLink,
+          });
+        })
+        .catch((err) => {
+          console.error(err.message);
+        });
     }
     fetchUser();
   }, []);
 
-  function handleChangeTelegram(e: React.ChangeEvent<HTMLInputElement>) {
-    setTelegram(e.target.value);
-  }
-
-  function handleChangeVk(e: React.ChangeEvent<HTMLInputElement>) {
-    setVk(e.target.value);
-  }
-
-  function handleChangeGitHub(e: React.ChangeEvent<HTMLInputElement>) {
-    setGitHub(e.target.value);
-  }
-
-  function handleChangeLinkedin(e: React.ChangeEvent<HTMLInputElement>) {
-    setLinkedin(e.target.value);
-  }
-
-  function handleChangeSity(e: React.ChangeEvent<HTMLInputElement>) {
-    setCity(e.target.value);
-  }
-
-  function handleChangeYear(e: React.ChangeEvent<HTMLInputElement>) {
-    setYearFooter(e.target.value);
-  }
-
-  function handleChangeAvatarLink(e: React.ChangeEvent<HTMLInputElement>) {
-    setAvatarLink(e.target.value);
-  }
-
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    updateUser({
-      avatarLink: avatarLink,
-      telegram: telegram,
-      vk: vk,
-      gitHub: gitHub,
-      linkedin: linkedin,
-      city: city,
-      yearFooter: +yearFooter,
-    });
+    updateUser(formData)
+      .then((user) => {
+        setFormData({
+          telegram: user.telegram,
+          vk: user.vk,
+          gitHub: user.gitHub,
+          linkedin: user.linkedin,
+          city: user.city,
+          yearFooter: user.yearFooter,
+          avatarLink: user.avatarLink,
+        });
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
   }
 
   return (
@@ -79,9 +70,9 @@ export default function ChangeSocialForm() {
           className="changesocial__input"
           name="telegram"
           placeholder="telegram"
-          value={telegram || ""}
-          onChange={handleChangeTelegram}
-        ></input>
+          value={formData.telegram}
+          onChange={handleChange}
+        />
       </label>
       <label className="changesocial__form-field">
         <input
@@ -89,19 +80,19 @@ export default function ChangeSocialForm() {
           className="changesocial__input"
           name="vk"
           placeholder="vk"
-          value={vk || ""}
-          onChange={handleChangeVk}
-        ></input>
+          value={formData.vk}
+          onChange={handleChange}
+        />
       </label>
       <label className="changesocial__form-field">
         <input
           type="url"
           className="changesocial__input"
-          name="github"
+          name="gitHub"
           placeholder="GitHub"
-          value={gitHub || ""}
-          onChange={handleChangeGitHub}
-        ></input>
+          value={formData.gitHub}
+          onChange={handleChange}
+        />
       </label>
       <label className="changesocial__form-field">
         <input
@@ -109,29 +100,29 @@ export default function ChangeSocialForm() {
           className="changesocial__input"
           name="linkedin"
           placeholder="linkedin"
-          value={linkedin || ""}
-          onChange={handleChangeLinkedin}
-        ></input>
+          value={formData.linkedin}
+          onChange={handleChange}
+        />
       </label>
       <label className="changesocial__form-field">
         <input
           type="text"
           className="changesocial__input"
-          name="sity"
-          placeholder="sity"
-          value={city || ""}
-          onChange={handleChangeSity}
-        ></input>
+          name="city"
+          placeholder="Город"
+          value={formData.city}
+          onChange={handleChange}
+        />
       </label>
       <label className="changesocial__form-field">
         <input
-          type="text"
+          type="number"
           className="changesocial__input"
-          name="year"
-          placeholder="year"
-          value={yearFooter || ""}
-          onChange={handleChangeYear}
-        ></input>
+          name="yearFooter"
+          placeholder="Год"
+          value={formData.yearFooter}
+          onChange={handleChange}
+        />
       </label>
       <label className="changesocial__form-field">
         <input
@@ -139,9 +130,9 @@ export default function ChangeSocialForm() {
           className="changesocial__input"
           name="avatarLink"
           placeholder="avatarLink"
-          value={avatarLink || ""}
-          onChange={handleChangeAvatarLink}
-        ></input>
+          value={formData.avatarLink}
+          onChange={handleChange}
+        />
       </label>
       <button type="submit" className="changesocial__btn">
         Изменить данные

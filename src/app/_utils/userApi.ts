@@ -1,57 +1,52 @@
+import { IUser, IUserSocials } from "../_interface/interface";
+
 const address = {
-  baseUrl: "http://localhost:3000",
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "no-cors",
-  },
+  baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
 };
 
-export function userData() {
+async function checkResponse<T>(res: Response): Promise<T> {
+  const result: T = await res.json();
+  if (!res.ok) {
+    throw new Error(`Error: ${res.statusText}`);
+  }
+  return result;
+}
+
+export function getUserData(): Promise<IUser> {
   return fetch(`${address.baseUrl}/user/`, {
     method: "GET",
     credentials: "include",
-    headers: address.headers,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
   })
-    .then((user) => {
-      return user.json();
-    })
-    .then((res) => {
-      return res;
+    .then(checkResponse<IUser>)
+    .catch((err: Error) => {
+      throw new Error(err.message || "Неизвестная ошибка");
     });
 }
 
-export function updateUser({
-  avatarLink,
-  telegram,
-  vk,
-  gitHub,
-  linkedin,
-  city,
-  yearFooter,
-}: {
-  avatarLink: string;
-  telegram: string;
-  vk: string;
-  gitHub: string;
-  linkedin: string;
-  city: string;
-  yearFooter: number;
-}) {
+export function updateUser(formData: IUserSocials): Promise<IUserSocials> {
   return fetch(`${address.baseUrl}/user/update/`, {
     method: "PATCH",
-    headers: address.headers,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
     credentials: "include",
     body: JSON.stringify({
-      avatarLink: `${avatarLink}`,
-      telegram: `${telegram}`,
-      vk: `${vk}`,
-      gitHub: `${gitHub}`,
-      linkedin: `${linkedin}`,
-      city: `${city}`,
-      yearFooter: `${yearFooter}`,
+      avatarLink: `${formData.avatarLink}`,
+      telegram: `${formData.telegram}`,
+      vk: `${formData.vk}`,
+      gitHub: `${formData.gitHub}`,
+      linkedin: `${formData.linkedin}`,
+      city: `${formData.city}`,
+      yearFooter: `${formData.yearFooter}`,
     }),
-  }).then((res) => {
-    return res.json();
-  });
+  })
+    .then(checkResponse<IUserSocials>)
+    .catch((err: Error) => {
+      throw new Error(err.message || "неизвестная ошибка");
+    });
 }

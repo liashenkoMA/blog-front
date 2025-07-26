@@ -15,3 +15,7 @@ export interface IUser extends IUserSocials {
   _id: number;
   mySite: string;
 }
+
+export interface PostFileResponse {
+  filePath: string;
+}

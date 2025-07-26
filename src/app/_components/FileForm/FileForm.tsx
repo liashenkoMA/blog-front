@@ -2,15 +2,26 @@
 
 import "./fileform.scss";
 import { postFile } from "@/app/_utils/fileApi";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useDropzone } from "react-dropzone";
 
 export function FileImgForm() {
   const [file, setFile] = useState<File | null>(null);
   const [fileImage, setFileImage] = useState("");
 
-  function handleChangeFile(e: React.ChangeEvent<HTMLInputElement>) {
-    setFile(e.target.files?.[0] || null);
-  }
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    setFile(acceptedFiles.length > 0 ? acceptedFiles[0] : null);
+    setFileImage("");
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      "image/*": [],
+    },
+    multiple: false,
+    noClick: true,
+  });
 
   async function checkFileSignature(file: File) {
     const signatures = {
@@ -48,10 +59,8 @@ export function FileImgForm() {
       file.type.includes("webp") &&
       !view.every((v, i) => v === signatures.webp[i])
     ) {
-      throw new Error("Файл не является WEebP");
+      throw new Error("Файл не является WebP");
     }
-
-    return true;
   }
 
   async function handleSubmitFile(e: React.FormEvent<HTMLFormElement>) {
@@ -76,16 +85,20 @@ export function FileImgForm() {
 
   return (
     <form className="uploadimg__form" onSubmit={handleSubmitFile}>
-      <label className="uploadimg__form-field">
+      <label className="uploadimg__form-field" {...getRootProps()}>
         <input
           type="file"
           name="file"
           className="uploadimg__input"
-          accept="image/*,.png,.jpg,.gif,.web,"
-          onChange={handleChangeFile}
+          accept="image/*,.png,.jpg,.gif,.webp"
+          {...getInputProps()}
         />
         <span className="uploadimg__text">
-          Выберите файл или перетащите его сюда
+          {file
+            ? `Выбран файл: ${file.name}`
+            : isDragActive
+            ? "Отпустите файл для загрузки"
+            : "Выберите файл или перетащите его сюда"}
         </span>
       </label>
       <div className="uploadimg__lists">

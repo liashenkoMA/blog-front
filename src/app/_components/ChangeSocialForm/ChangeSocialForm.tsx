@@ -22,24 +22,21 @@ export default function ChangeSocialForm() {
   }
 
   useEffect(() => {
-    function fetchUser() {
-      getUserData()
-        .then((user) => {
-          setFormData({
-            telegram: user.telegram,
-            vk: user.vk,
-            gitHub: user.gitHub,
-            linkedin: user.linkedin,
-            city: user.city,
-            yearFooter: user.yearFooter,
-            avatarLink: user.avatarLink,
-          });
-        })
-        .catch((err) => {
-          console.error(err.message);
+    getUserData()
+      .then((user) => {
+        setFormData({
+          telegram: user.telegram,
+          vk: user.vk,
+          gitHub: user.gitHub,
+          linkedin: user.linkedin,
+          city: user.city,
+          yearFooter: user.yearFooter,
+          avatarLink: user.avatarLink,
         });
-    }
-    fetchUser();
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
   }, []);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {

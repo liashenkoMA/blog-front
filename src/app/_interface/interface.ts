@@ -16,6 +16,11 @@ export interface IUser extends IUserSocials {
   mySite: string;
 }
 
-export interface PostFileResponse {
+export interface IPostFileResponse {
   filePath: string;
+}
+
+export interface ILoginResponse {
+  access_token?: string;
+  error?: string;
 }

@@ -1,3 +1,4 @@
+import { telegramBot } from "@/app/_utils/telegramApi";
 import "./contactform.scss";
 
 export default function ContactForm() {
@@ -8,7 +9,13 @@ export default function ContactForm() {
           Контакты
         </h2>
         <div className="contactform__conteiner">
-          <form className="contactform__form">
+          <form
+            className="contactform__form"
+            action={async (formData: FormData) => {
+              "use server";
+              await telegramBot(formData);
+            }}
+          >
             <div className="contactform__form-inputs">
               <div className="contactform__inputs-contact">
                 <label className="contactform__form-field">

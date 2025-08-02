@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { ILoginResponse } from "../_interface/interface";
 
 const auth = {
-  baseUrl: "http://localhost:3000",
+  baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

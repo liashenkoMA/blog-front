@@ -1,0 +1,30 @@
+@use "../../variables" as v;
+@use "../../mixins" as m;
+
+.buttonup {
+  &__button {
+    width: 60px;
+    height: 60px;
+
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+
+    background: url(../../_images/arrow-up.png) no-repeat center;
+    background-size: 30px 30px;
+
+    background-color: v.$main-background-color;
+    border: 1px solid v.$border-color;
+    border-radius: 8px;
+
+    @include m.hover {
+      cursor: pointer;
+      border: 1px solid v.$blue;
+      box-shadow: v.$shadow;
+    }
+
+    &_type_hide {
+      display: none;
+    }
+  }
+}

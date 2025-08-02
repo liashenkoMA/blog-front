@@ -1,9 +1,9 @@
 import "./profile.scss";
 
+import { IUserProps } from "@/app/_interface/interface";
 import Image from "next/image";
-import photo from "@/app/_images/photo.jpg";
 
-export default function Profile() {
+export default function Profile({ user }: IUserProps) {
   return (
     <section className="profile">
       <div className="profile__content">
@@ -15,23 +15,26 @@ export default function Profile() {
               <p className="profile__text">Всем привет!</p>
               <p className="profile__text">
                 Меня зовут Максим. Я начинающий веб-разработчик и
-                специализируюсь на фронтенде, хотя немного шарю и за бэкенд. В
-                основном использую{" "}
+                специализируюсь на фронтенде, хотя немного разбираюсь и в
+                бэкенде. В основном использую{" "}
                 <span className="profile__text profile__text-color">
                   Nextjs
                 </span>
-                , поскольку под капотом{" "}
+                , так как под капотом —{" "}
                 <span className="profile__text profile__text-color">React</span>
-                , а для бэка -{" "}
+                , а для бэка —{" "}
                 <span className="profile__text profile__text-color">
                   Nestjs
                 </span>
-                . Ну и да, по большей части я самоучка
+                . Ну и да, по большей части я самоучка.
               </p>
               <p className="profile__text">
-                Из любимых хобби: аниме, фильмы, сериалы. Обожаю читать мангу и
-                играть в настолки. Мечтаю хотя бы раз сыграть в DnD. И да, как
-                истинный любитель всего японского, в свободное время учу язык.
+                Из любимых хобби — аниме, фильмы, сериалы и активные виды
+                спорта. Обожаю читать мангу и играть в настолки, кататься на
+                велосипеди и плавать, ходить в походы и просто гулять по городу.
+                Мечтаю хотя бы раз сыграть в DnD и подняться на Эльбрус. И да,
+                как истинный любитель всего японского, в свободное время учу
+                язык.
               </p>
             </div>
             <p className="profile__html-tag">&lt;/p&gt;</p>
@@ -39,7 +42,7 @@ export default function Profile() {
         </div>
         <div className="profile__photo">
           <Image
-            src={photo}
+            src={user.avatarLink}
             width={462}
             height={556}
             loading="lazy"

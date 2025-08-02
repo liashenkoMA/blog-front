@@ -42,7 +42,7 @@ export default async function Skills() {
             <p className="skills__description">
               Формальный язык декорирования и описания внешнего вида документа,
               написанного с использованием языка разметки (чаще всего HTML или
-              XHTML)
+              XHTML).
             </p>
           </li>
           <li className="skills__tech">
@@ -84,8 +84,8 @@ export default async function Skills() {
             />
             <p className="skills__header">React</p>
             <p className="skills__description">
-              NetTracking is a very powerful Web 2.0 site search engine allows
-              you to find email allerts
+              JavaScript-библиотека с открытым исходным кодом для разработки
+              пользовательских интерфейсов.
             </p>
           </li>
           <li className="skills__tech">
@@ -113,7 +113,7 @@ export default async function Skills() {
             <p className="skills__header">NestJs</p>
             <p className="skills__description">
               Фреймворк для создания эффективных, масштабируемых Node.js
-              веб-приложений
+              веб-приложений.
             </p>
           </li>
           <li className="skills__tech">
@@ -128,7 +128,7 @@ export default async function Skills() {
             <p className="skills__description">
               Документоориентированная система управления базами данных, не
               требующая описания схемы таблиц. Считается одним из классических
-              примеров NoSQL-систем
+              примеров NoSQL-систем.
             </p>
           </li>
         </ol>

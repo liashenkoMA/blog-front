@@ -4,7 +4,9 @@ export default function ContactForm() {
   return (
     <section className="contactform">
       <div className="contactform__content">
-        <h2 className="contactform__title">Контакты</h2>
+        <h2 className="contactform__title" id="contact__title">
+          Контакты
+        </h2>
         <div className="contactform__conteiner">
           <form className="contactform__form">
             <div className="contactform__form-inputs">
@@ -47,6 +49,10 @@ export default function ContactForm() {
                 <span className="contactform__error"></span>
               </label>
             </div>
+            <p className="contactform__text">
+              Нажимая кнопку «Отправить сообщение» вы даете согласие на
+              обработку персональных данных.
+            </p>
             <button type="submit" className="contactform__btn">
               Отправить сообщение
             </button>

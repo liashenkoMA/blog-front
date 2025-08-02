@@ -6,7 +6,7 @@ import { Metadata } from "next";
 
 import Header from "../_components/Header/Header";
 import Footer from "../_components/Footer/Footer";
-import { userData } from "../_utils/userApi";
+import { getUserData } from "../_utils/userApi";
 
 const ubuntu = Roboto({ subsets: ["latin"], weight: ["300", "400", "500"] });
 
@@ -20,7 +20,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await userData();
+  const user = await getUserData();
 
   return (
     <html lang="ru">

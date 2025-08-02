@@ -8,7 +8,8 @@
     align-items: center;
 
     @include m.media-1439 {
-      margin-top: 64px;
+      margin: 64px auto 0px auto;
+
     }
   }
 

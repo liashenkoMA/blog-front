@@ -3,15 +3,13 @@ import "./developer.scss";
 import Link from "next/link";
 import Image from "next/image";
 
-import { userData } from "@/app/_utils/userApi";
 import emailIcon from "@/app/_images/icon-mail.png";
 import sityIcon from "@/app/_images/icon-map-pin.png";
 import workIcon from "@/app/_images/icon-work.png";
 import linkIcon from "@/app/_images/icon-link.png";
+import { IUserProps } from "@/app/_interface/interface";
 
-export default async function Developer() {
-  const user = await userData();
-
+export default function Developer({ user }: IUserProps) {
   return (
     <section className="developer">
       <div className="developer__conteiner">
@@ -99,10 +97,10 @@ export default async function Developer() {
             <div className="developer__description">
               <span className="developer__html-tag">&lt;p&gt;</span>
               <p className="developer__description-text text-position">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui
-                nisi cumque magni praesentium eveniet expedita cum deserunt
-                nobis molestiae, quas accusamus adipisci cupiditate, id debitis
-                amet quis eaque ipsum repellendus?
+                Этот блог я создал в рамках работы над пет-проектами — в
+                будущем, возможно, буду делиться статьями о том, как
+                реализовывал различные идеи, какие технологии использовал и с
+                какими трудностями сталкивался.
               </p>
               <span className="developer__html-tag">&lt;/p&gt;</span>
             </div>

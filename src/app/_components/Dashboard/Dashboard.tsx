@@ -7,8 +7,10 @@ import { useState } from "react";
 import mainsidebar from "@/app/_images/mainsidebar.png";
 import logpassimg from "@/app/_images/logpasssidebar.png";
 import imgsidebar from "@/app/_images/imgsidebar.png";
+
 import ChangeSocialForm from "../ChangeSocialForm/ChangeSocialForm";
-import { FileImgForm } from "../FileForm/FileForm";
+import FileImgForm from "../FileForm/FileForm";
+import ArticleDownloadForm from "../ArticleDownloadForm/ArticleDownloadForm";
 
 export default function Dashboard() {
   const [active, setActive] = useState("Main");
@@ -65,12 +67,29 @@ export default function Dashboard() {
               Загрузить картинку
             </button>
           </li>
+          <li className="sidebar__list">
+            <button
+              type="button"
+              className="sidebar__btn"
+              onClick={() => setActive("article")}
+            >
+              <Image
+                src={imgsidebar}
+                width={25}
+                height={25}
+                className="sidebar__img"
+                alt="Иконка главной"
+              ></Image>
+              Добавить статью
+            </button>
+          </li>
         </ol>
       </aside>
       <section className="dashboard">
         {active === "Main" && <div>Главная</div>}
         {active === "LogPass" && <ChangeSocialForm />}
         {active === "file" && <FileImgForm />}
+        {active === "article" && <ArticleDownloadForm />}
       </section>
     </main>
   );

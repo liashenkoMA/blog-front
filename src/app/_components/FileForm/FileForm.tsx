@@ -5,7 +5,7 @@ import { postFile } from "@/app/_utils/fileApi";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-export function FileImgForm() {
+export default function FileImgForm() {
   const [file, setFile] = useState<File | null>(null);
   const [fileImage, setFileImage] = useState("");
 

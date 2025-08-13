@@ -14,7 +14,6 @@
     border-radius: 30px;
     display: flex;
     flex-direction: column;
-
     @include m.media-1439 {
       max-width: 768px;
 
@@ -45,7 +44,6 @@
     justify-content: center;
     @include m.text-fontsize-x-large;
     color: v.$main-text-color;
-
     @include m.media-767 {
       width: 224px;
       height: 68px;
@@ -70,10 +68,8 @@
     width: 280px;
     padding: 18px 12px 12px 12px;
     background-color: v.$main-background-color;
-
     border: 1px solid v.$border-color;
     border-radius: 16px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,7 +79,6 @@
     padding-top: 5px;
     @include m.text-fontsize-large;
     color: v.$light-blue;
-
     @include m.media-767 {
       @include m.text-fontsize-small;
     }
@@ -94,7 +89,6 @@
     text-align: center;
     @include m.text-fontsize-small;
     color: v.$main-text-color;
-
     @include m.media-767 {
       @include m.text-fontsize-x-small;
     }

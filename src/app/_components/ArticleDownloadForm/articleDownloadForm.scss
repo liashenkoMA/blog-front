@@ -1,0 +1,71 @@
+@use "../../variables" as v;
+@use "../../mixins" as m;
+
+.articledownloadform {
+  &__form {
+    min-width: 700px;
+    padding: 20px;
+    background-color: rgb(19, 28, 49, 0.7);
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__input {
+    padding: 10px;
+    min-width: 600px;
+    height: 38px;
+    background-color: transparent;
+    border: 1px solid v.$blue;
+    border-radius: 15px;
+    @include m.text-fontsize-xx-small;
+    color: v.$white;
+  }
+
+  &__input::placeholder {
+    color: v.$white;
+  }
+
+  &__input:focus {
+    background-color: rgb(15, 23, 42, 0.6);
+  }
+
+  &__lists {
+    padding: 10px;
+    min-width: 600px;
+    height: 38px;
+    background-color: transparent;
+    border: 1px solid v.$blue;
+    border-radius: 15px;
+    @include m.text-fontsize-xx-small;
+    color: v.$white;
+  }
+
+  &__list {
+    color: v.$blue;
+  }
+
+  &__list:focus {
+    background-color: rgb(15, 23, 42, 0.6);
+  }
+
+  &__btn {
+    min-width: 200px;
+    min-height: 60px;
+    background-color: transparent;
+    border: 1px solid v.$blue;
+    border-radius: 15px;
+    @include m.text-fontsize-x-small;
+    color: v.$white;
+    @include m.hover {
+      cursor: pointer;
+      background-color: rgb(15, 23, 42, 0.2);
+    }
+  }
+
+  &__btn:active {
+    background-color: rgb(15, 23, 42, 0.6);
+  }
+}

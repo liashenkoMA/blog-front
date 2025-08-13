@@ -190,4 +190,8 @@
       box-shadow: v.$shadow;
     }
   }
+
+  &__btn:active {
+    background-color: v.$blue;
+  }
 }

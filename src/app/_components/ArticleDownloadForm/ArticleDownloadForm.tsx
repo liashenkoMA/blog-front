@@ -107,6 +107,7 @@ export default function ArticleDownloadForm() {
             type={input.type}
             onChange={handleChange}
             className="articledownloadform__input"
+            required
           ></input>
         </label>
       ))}

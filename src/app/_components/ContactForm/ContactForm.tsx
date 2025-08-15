@@ -19,7 +19,7 @@ export default function ContactForm() {
             <div className="contactform__form-inputs">
               <div className="contactform__inputs-contact">
                 <label className="contactform__form-field">
-                  <span className="contactform__text">Ваше имя *</span>
+                  <span className="contactform__text">Ваше имя: *</span>
                   <input
                     type="text"
                     name="name"
@@ -33,7 +33,7 @@ export default function ContactForm() {
                 </label>
 
                 <label className="contactform__form-field">
-                  <span className="contactform__text">Ваш email *</span>
+                  <span className="contactform__text">Ваш email: *</span>
                   <input
                     type="email"
                     name="email"
@@ -46,7 +46,7 @@ export default function ContactForm() {
               </div>
 
               <label className="contactform__form-field">
-                <span className="contactform__text">Ваше сообщение *</span>
+                <span className="contactform__text">Ваше сообщение: *</span>
                 <textarea
                   name="message"
                   placeholder="Введите ваше сообщение"
@@ -57,7 +57,7 @@ export default function ContactForm() {
               </label>
             </div>
             <p className="contactform__text">
-              Нажимая кнопку «Отправить сообщение» вы даете согласие на
+              * Нажимая кнопку «Отправить сообщение» вы даете согласие на
               обработку персональных данных.
             </p>
             <button type="submit" className="contactform__btn">

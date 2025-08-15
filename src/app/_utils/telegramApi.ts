@@ -1,6 +1,6 @@
 export async function telegramBot(formData: FormData) {
-  const email = formData.get("email");
-  const name = formData.get("name");
+  const email = (formData.get("email") as string).trim();
+  const name = (formData.get("name") as string).trim();
   const message = formData.get("message");
 
   const messageData = `
@@ -10,22 +10,27 @@ export async function telegramBot(formData: FormData) {
     Сообщение: ${message}
     `;
 
-  const res = await fetch(
-    `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: process.env.CHAT_ID,
-        text: messageData,
-        parse_mod: "HTML",
-      }),
-    }
-  )
-    .then((res) => res.json())
-    .catch((err: Error) => {
-      console.error(err);
-    });
+  try {
+    const response = await fetch(
+      `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: process.env.CHAT_ID,
+          text: messageData,
+          parse_mode: "HTML",
+        }),
+      }
+    );
 
-  return res;
+    if (!response.ok) {
+      throw new Error(`Telegram API error: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (err) {
+    console.error("Ошибка при отправке сообщения в Telegram:", err);
+    return null;
+  }
 }

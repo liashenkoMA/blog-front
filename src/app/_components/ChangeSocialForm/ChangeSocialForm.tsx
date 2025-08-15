@@ -18,7 +18,10 @@ export default function ChangeSocialForm() {
   });
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setFormData((data) => ({ ...data, [e.target.name]: e.target.value }));
+    setFormData((data) => ({
+      ...data,
+      [e.target.name]: e.target.value.trim(),
+    }));
   }
 
   useEffect(() => {

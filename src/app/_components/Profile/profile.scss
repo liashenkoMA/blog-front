@@ -52,7 +52,6 @@
     justify-content: center;
     @include m.text-fontsize-x-large;
     color: v.$main-text-color;
-
     @include m.media-767 {
       width: 224px;
       height: 68px;
@@ -66,7 +65,6 @@
     border-radius: 40px;
     border: 1px solid v.$border-color;
     background-color: v.$main-background-color;
-
     @include m.media-767 {
       padding: 24px 10px;
     }
@@ -82,7 +80,6 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-
     @include m.media-767 {
       padding: 8px 0px 8px 12px;
       gap: 8px;
@@ -102,7 +99,6 @@
     object-fit: cover;
     border-radius: 16px;
     border: 1px solid v.$border-color;
-
     @include m.media-1679 {
       width: 458px;
     }

@@ -28,3 +28,21 @@ export interface ILoginResponse {
   access_token?: string;
   error?: string;
 }
+
+export interface IArticleData {
+  url: string;
+  title: string;
+  description: string;
+  category: string;
+  articleImg: string;
+  articleImgAlt: string;
+  articleH1: string;
+}
+
+export interface IArticle extends IArticleData {
+  article: string;
+}
+
+export interface IArticlePromise extends IArticle {
+  _id: string;
+}

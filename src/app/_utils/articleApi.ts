@@ -15,7 +15,7 @@ async function checkResponse<T>(res: Response): Promise<T> {
 
 export async function postArticle(data: IArticle): Promise<IArticlePromise> {
   try {
-    const res = await fetch(`${address.baseUrl}/article`, {
+    const res = await fetch(`${address.baseUrl}/articles`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -30,11 +30,25 @@ export async function postArticle(data: IArticle): Promise<IArticlePromise> {
   }
 }
 
-export async function getArticle() {}
+export async function getArticle(urlArticle: string): Promise<IArticlePromise> {
+  try {
+    const res = await fetch(
+      `${address.baseUrl}/articles/getarticle/${urlArticle}`,
+      {
+        method: "GET",
+        credentials: "include",
+      }
+    );
+
+    return await checkResponse<IArticlePromise>(res);
+  } catch (err) {
+    throw new Error((err as Error).message || "Неизвестная ошибка");
+  }
+}
 
 export async function getArticleCategories(): Promise<string[]> {
   try {
-    const res = await fetch(`${address.baseUrl}/article/all_categories`, {
+    const res = await fetch(`${address.baseUrl}/articles/all_categories`, {
       method: "GET",
       credentials: "include",
     });

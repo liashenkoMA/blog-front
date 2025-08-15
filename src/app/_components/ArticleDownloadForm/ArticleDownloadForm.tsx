@@ -153,10 +153,12 @@ export default function ArticleDownloadForm() {
           ></input>
         </label>
       )}
-      <EditorComp
-        markdown={article}
-        onChange={(value: string) => setArticle(value)}
-      />
+      <div className="articledownloadform__editor-wrapper">
+        <EditorComp
+          markdown={article}
+          onChange={(value: string) => setArticle(value)}
+        />
+      </div>
       <button
         type="submit"
         disabled={isSubmitting}

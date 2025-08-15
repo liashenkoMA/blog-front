@@ -68,4 +68,34 @@
   &__btn:active {
     background-color: rgb(15, 23, 42, 0.6);
   }
+
+  &__editor-wrapper {
+    width: 100%;
+    max-width: 700px;
+    border: 1px solid v.$blue;
+    border-radius: 15px;
+    padding: 10px;
+    background-color: rgb(19, 28, 49, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__editor-wrapper .dark-editor {
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 280px;
+    background-color: rgb(15, 23, 42, 0.8);
+    color: v.$white;
+
+    .cm-content {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .sp-wrapper {
+      border-radius: 10px;
+      border: 1px solid v.$blue;
+    }
+  }
 }

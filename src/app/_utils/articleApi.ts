@@ -34,7 +34,7 @@ export async function getArticle() {}
 
 export async function getArticleCategories(): Promise<string[]> {
   try {
-    const res = await fetch(`${address.baseUrl}/article/categories`, {
+    const res = await fetch(`${address.baseUrl}/article/all_categories`, {
       method: "GET",
       credentials: "include",
     });

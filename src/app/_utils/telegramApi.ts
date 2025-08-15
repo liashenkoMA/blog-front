@@ -1,6 +1,6 @@
 export async function telegramBot(formData: FormData) {
-  const email = formData.get("email");
-  const name = formData.get("name");
+  const email = (formData.get("email") as string).trim();
+  const name = (formData.get("name") as string).trim();
   const message = formData.get("message");
 
   const messageData = `

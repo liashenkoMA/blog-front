@@ -11,6 +11,12 @@ const EditorComp = dynamic(
   { ssr: false }
 );
 
+type InputField = {
+  name: keyof IArticleData;
+  placeholder: string;
+  type: string;
+};
+
 export default function ArticleDownloadForm() {
   const [article, setArticle] = useState("Hello **world**!");
   const [categories, setCategories] = useState<string[]>([]);
@@ -26,7 +32,7 @@ export default function ArticleDownloadForm() {
     articleImgAlt: "",
     articleH1: "",
   });
-  const inputs = [
+  const inputs: InputField[] = [
     { name: "url", placeholder: "Введите url статьи", type: "text" },
     { name: "title", placeholder: "Введите title статьи", type: "text" },
     {
@@ -106,6 +112,7 @@ export default function ArticleDownloadForm() {
             placeholder={input.placeholder}
             type={input.type}
             onChange={handleChange}
+            value={formData[input.name]}
             className="articledownloadform__input"
             required
           ></input>

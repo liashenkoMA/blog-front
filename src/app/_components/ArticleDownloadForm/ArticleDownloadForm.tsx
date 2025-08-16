@@ -24,7 +24,7 @@ export default function ArticleDownloadForm() {
   const [selectNewCategory, setSelectNewCategory] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<IArticleData>({
-    url: "",
+    slug: "",
     title: "",
     description: "",
     category: "",
@@ -33,7 +33,7 @@ export default function ArticleDownloadForm() {
     articleH1: "",
   });
   const inputs: InputField[] = [
-    { name: "url", placeholder: "Введите url статьи", type: "text" },
+    { name: "slug", placeholder: "Введите url статьи", type: "text" },
     { name: "title", placeholder: "Введите title статьи", type: "text" },
     {
       name: "description",
@@ -87,7 +87,7 @@ export default function ArticleDownloadForm() {
       setIsSubmitting(true);
       await postArticle(data);
       setFormData({
-        url: "",
+        slug: "",
         title: "",
         description: "",
         category: "",

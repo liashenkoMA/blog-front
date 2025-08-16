@@ -30,17 +30,37 @@ export async function postArticle(data: IArticle): Promise<IArticlePromise> {
   }
 }
 
-export async function getArticle(urlArticle: string): Promise<IArticlePromise> {
+export async function getArticle(
+  urlArticle: string
+): Promise<IArticlePromise | null> {
   try {
     const res = await fetch(
       `${address.baseUrl}/articles/getarticle/${urlArticle}`,
       {
         method: "GET",
         credentials: "include",
+        next: { revalidate: 84600 },
       }
     );
 
+    if (res.status === 404) {
+      return null;
+    }
+
     return await checkResponse<IArticlePromise>(res);
+  } catch (err) {
+    throw new Error((err as Error).message || "Неизвестная ошибка");
+  }
+}
+
+export async function getArticles(): Promise<IArticlePromise[]> {
+  try {
+    const res = await fetch(`${address.baseUrl}/articles/getarticle/`, {
+      method: "GET",
+      credentials: "include",
+    });
+
+    return await checkResponse<IArticlePromise[]>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }

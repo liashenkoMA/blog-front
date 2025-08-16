@@ -30,7 +30,7 @@ export interface ILoginResponse {
 }
 
 export interface IArticleData {
-  url: string;
+  slug: string;
   title: string;
   description: string;
   category: string;

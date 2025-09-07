@@ -1,6 +1,7 @@
 import "./article.scss";
 
 import Sidebar from "@/app/_components/Sidebar/Sidebar";
+import Image from "next/image";
 import { getArticle, getArticles } from "@/app/_utils/articleApi";
 import { notFound } from "next/navigation";
 import ArticleHeader from "@/app/_components/ArticleHeader/ArticleHeader";
@@ -54,6 +55,13 @@ export default async function Page({
       <div className="article__body">
         <main className="article__content">
           <article className="article__post">
+            <Image
+              src={article.articleImg}
+              alt={article.articleImgAlt}
+              width={940}
+              height={450}
+              className="article__post-image"
+            />
             <CustomMDX article={article.article} />
           </article>
         </main>

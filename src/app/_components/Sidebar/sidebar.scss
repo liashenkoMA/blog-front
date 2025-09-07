@@ -1,1 +1,10 @@
-.sidebar {}
+@use "../../mixins" as m;
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  @include m.media-767 {
+    margin-bottom: 60px;
+  }
+}

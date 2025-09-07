@@ -1,5 +1,7 @@
 // ==== USER ====
 
+import { ReactNode } from "react";
+
 export interface IUserSocials {
   avatarLink: string;
   telegram: string;
@@ -81,4 +83,12 @@ export interface ITagData {
 
 export interface ITagPromise extends ITagData {
   _id: string;
+}
+
+// ==== SIDEBAR ====
+
+export interface ISidebarComponentProps<T> {
+  title: string;
+  sidebarData: T[];
+  renderItem: (item: T) => ReactNode;
 }

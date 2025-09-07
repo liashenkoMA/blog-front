@@ -13,7 +13,7 @@ export default async function ArticleHeader({
   props: IArticlePromise;
 }) {
   const author = await getUserData();
-  
+
   function getISODate(date: string) {
     const formattedDate = new Date(date);
 
@@ -32,15 +32,22 @@ export default async function ArticleHeader({
         <div className="articleheader__info">
           <h1 className="articleheader__title">{props.articleTitle}</h1>
           <div className="articleheader__author">
-            <Image
-              src={author.avatarLink}
-              width={60}
-              height={60}
-              alt="Аватарка пользователя"
-              className="articleheader__avatar"
-            />
+            <Link
+              href={`/aboutme`}
+              className="articleheader__author-avatar-link"
+            >
+              <Image
+                src={author.avatarLink}
+                width={60}
+                height={60}
+                alt="Аватарка пользователя"
+                className="articleheader__avatar"
+              />
+            </Link>
             <div className="articleheader__author-info">
-              <p className="articleheader__author-name">{author.name}</p>
+              <Link href={`/aboutme`} className="articleheader__author-link">
+                {author.name}
+              </Link>
               <p className="articleheader__date-publick">
                 {getISODate(props.createdAt)}
               </p>

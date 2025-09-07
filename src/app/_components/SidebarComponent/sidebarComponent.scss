@@ -1,0 +1,27 @@
+@use "../../variables" as v;
+@use "../../mixins" as m;
+
+.sidebar {
+  &__component {
+    border-radius: 15px;
+    border: 1px solid v.$border-color;
+    background-color: v.$background-element-color;
+  }
+
+  &__component_category {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &_title {
+      padding: 30px 0px 0px 20px;
+      @include m.text-gradient;
+      text-decoration: underline v.$blue;
+    }
+
+    &_lists {
+      margin: 0px 30px 10px 20px;
+      list-style: none;
+    }
+  }
+}

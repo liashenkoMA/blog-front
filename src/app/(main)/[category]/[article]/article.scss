@@ -1,0 +1,42 @@
+@use "../../../variables" as v;
+@use "../../../mixins" as m;
+
+.article {
+  margin: 0px auto;
+  max-width: 1440px;
+
+  @include m.media-1679 {
+    max-width: 1280px;
+  }
+
+  @include m.media-1439 {
+    max-width: 768px;
+  }
+
+  @include m.media-1023 {
+    max-width: 680px;
+  }
+
+  @include m.media-767 {
+    max-width: 290px;
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: 1fr minmax(14rem, 25%);
+
+    @include m.media-1023 {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+    }
+  }
+
+  &__content {
+  }
+
+  &__text {
+    padding-bottom: 60px;
+    @include m.text-fontsize-small;
+    color: v.$main-text-color;
+  }
+}

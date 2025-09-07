@@ -1,4 +1,9 @@
-import { IArticle, IArticlePromise } from "../_interface/interface";
+import {
+  IArticle,
+  IArticlePromise,
+  ICategoryPromise,
+  ITagPromise,
+} from "../_interface/interface";
 
 const address = {
   baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -13,68 +18,68 @@ async function checkResponse<T>(res: Response): Promise<T> {
   return result;
 }
 
-export async function postArticle(data: IArticle): Promise<IArticlePromise> {
+// === CATEGORY ===
+
+export async function postCategory() {}
+
+export async function getCategories(): Promise<ICategoryPromise[]> {
   try {
-    const res = await fetch(`${address.baseUrl}/articles`, {
-      method: "POST",
+    const res = await fetch(`${address.baseUrl}/articles/categories`, {
+      method: "GET",
+      credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
     });
 
-    return await checkResponse<IArticlePromise>(res);
+    return checkResponse<ICategoryPromise[]>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }
 }
 
-export async function getArticle(
-  urlArticle: string
-): Promise<IArticlePromise | null> {
+// === TAG ===
+
+export async function postTag() {}
+
+export async function getTags(): Promise<ITagPromise[]> {
   try {
-    const res = await fetch(
-      `${address.baseUrl}/articles/getarticle/${urlArticle}`,
-      {
-        method: "GET",
-        credentials: "include",
-        next: { revalidate: 84600 },
-      }
-    );
-
-    if (res.status === 404) {
-      return null;
-    }
-
-    return await checkResponse<IArticlePromise>(res);
-  } catch (err) {
-    throw new Error((err as Error).message || "Неизвестная ошибка");
-  }
-}
-
-export async function getArticles(): Promise<IArticlePromise[]> {
-  try {
-    const res = await fetch(`${address.baseUrl}/articles/getarticle/`, {
+    const res = await fetch(`${address.baseUrl}/articles/tags`, {
       method: "GET",
       credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
     });
 
-    return await checkResponse<IArticlePromise[]>(res);
+    return checkResponse<ITagPromise[]>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }
 }
 
-export async function getArticleCategories(): Promise<string[]> {
+// === ARTICLE ===
+
+export async function postArticle(
+  articlePayload: IArticle
+): Promise<IArticlePromise> {
   try {
-    const res = await fetch(`${address.baseUrl}/articles/all_categories`, {
-      method: "GET",
-      credentials: "include",
+    const res = await fetch(`${address.baseUrl}/articles`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(articlePayload),
     });
 
-    return await checkResponse<string[]>(res);
+    return checkResponse<IArticlePromise>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }
 }
+
+export async function getArticle() {}
+
+export async function getArticles() {}

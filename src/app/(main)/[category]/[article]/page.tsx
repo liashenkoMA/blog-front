@@ -1,9 +1,11 @@
-import { IArticlePromise } from "@/app/_interface/interface";
+import Sidebar from "@/app/_components/Sidebar/Sidebar";
 import "./article.scss";
 
+import { IArticlePromise } from "@/app/_interface/interface";
 import { getArticle, getArticles } from "@/app/_utils/articleApi";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
+import ArticleHeader from "@/app/_components/ArticleHeader/ArticleHeader";
 
 async function loadArticle(articleSlug: string) {
   const article = await getArticle(articleSlug);
@@ -44,8 +46,17 @@ export default async function Page({
   }
 
   return (
-    <div>
-      <MDXRemote source={article.article} />
+    <div className="article">
+      <ArticleHeader />
+      <div className="article__body">
+        <main className="article__content">
+          <article className="article__text">
+            <MDXRemote source={article.article} />
+          </article>
+        </main>
+        <Sidebar />
+      </div>
+      {/* Comments */}
     </div>
   );
 }

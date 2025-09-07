@@ -18,10 +18,23 @@
     min-width: 600px;
     height: 38px;
     background-color: transparent;
-    border: 1px solid v.$blue;
-    border-radius: 15px;
     @include m.text-fontsize-xx-small;
     color: v.$white;
+
+    &_type_article {
+      border: 1px solid v.$blue;
+      border-radius: 15px;
+    }
+
+    &_type_category {
+      border: 1px solid v.$aqamarin;
+      border-radius: 15px;
+    }
+
+    &_type_tag {
+      border: 1px solid v.$dark-blue;
+      border-radius: 15px;
+    }
   }
 
   &__input::placeholder {
@@ -37,10 +50,19 @@
     min-width: 600px;
     height: 38px;
     background-color: transparent;
-    border: 1px solid v.$blue;
-    border-radius: 15px;
     @include m.text-fontsize-xx-small;
     color: v.$white;
+
+    &_type_category {
+      border: 1px solid v.$aqamarin;
+      background-color: rgb(15, 23, 42, 0.6);
+    }
+
+    &_type_tag {
+      height: auto;
+      border: 1px solid v.$dark-blue;
+      background-color: rgb(15, 23, 42, 0.6);
+    }
   }
 
   &__list {

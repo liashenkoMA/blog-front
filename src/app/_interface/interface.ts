@@ -41,14 +41,20 @@ export interface IArticleData {
   articleImgAlt: string;
   articleH1: string;
 }
-export interface IArticle extends IArticleData {
+
+export interface IArticlePayload extends IArticleData {
   article: string;
   articleCategory: string | ICategoryData;
   articleTags: (string | ITagData)[];
 }
 
-export interface IArticlePromise extends IArticle {
+export interface IArticlePromise extends IArticleData {
+  article: string;
+  articleCategory: ICategoryData;
+  articleTags: ITagData[];
   _id: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ICategoryData {

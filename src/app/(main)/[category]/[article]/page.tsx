@@ -1,11 +1,12 @@
-import Sidebar from "@/app/_components/Sidebar/Sidebar";
 import "./article.scss";
 
-import { IArticlePromise } from "@/app/_interface/interface";
+import Sidebar from "@/app/_components/Sidebar/Sidebar";
 import { getArticle, getArticles } from "@/app/_utils/articleApi";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import ArticleHeader from "@/app/_components/ArticleHeader/ArticleHeader";
+import { IArticlePromise } from "@/app/_interface/interface";
+import { Metadata } from "next";
+import { CustomMDX } from "@/app/_components/MDXRemote/MdxRemote";
 
 async function loadArticle(articleSlug: string) {
   const article = await getArticle(articleSlug);
@@ -20,26 +21,28 @@ async function loadArticle(articleSlug: string) {
 export async function generateMetadata({
   params,
 }: {
-  params: { category: string; article: string };
-}) {
-  const article = await loadArticle(params.article);
+  params: Promise<{ article: string; category: string }>;
+}): Promise<Metadata> {
+  const awaitedParams = await params;
+  const article = await loadArticle(awaitedParams.article);
 
   if (!article) {
     return { title: "Статья не найдена" };
   }
 
   return {
-    title: article.title,
-    description: article.description,
+    title: article.articleTitle,
+    description: article.articleDescription,
   };
 }
 
 export default async function Page({
   params,
 }: {
-  params: { category: string; article: string };
+  params: Promise<{ article: string; category: string }>;
 }) {
-  const article = await loadArticle(params.article);
+  const awaitedParams = await params;
+  const article = await loadArticle(awaitedParams.article);
 
   if (!article) {
     return notFound();
@@ -47,16 +50,15 @@ export default async function Page({
 
   return (
     <div className="article">
-      <ArticleHeader />
+      <ArticleHeader props={article} />
       <div className="article__body">
         <main className="article__content">
-          <article className="article__text">
-            <MDXRemote source={article.article} />
+          <article className="article__post">
+            <CustomMDX article={article.article} />
           </article>
         </main>
         <Sidebar />
       </div>
-      {/* Comments */}
     </div>
   );
 }
@@ -65,7 +67,7 @@ export async function generateStaticParams() {
   const articles = await getArticles();
 
   return articles.map((article: IArticlePromise) => ({
-    category: article.category,
-    article: article.slug,
+    category: article.articleCategory.categorySlug,
+    article: article.articleSlug,
   }));
 }

@@ -1,5 +1,5 @@
 import {
-  IArticle,
+  IArticlePayload,
   IArticlePromise,
   ICategoryPromise,
   ITagPromise,
@@ -63,7 +63,7 @@ export async function getTags(): Promise<ITagPromise[]> {
 // === ARTICLE ===
 
 export async function postArticle(
-  articlePayload: IArticle
+  articlePayload: IArticlePayload
 ): Promise<IArticlePromise> {
   try {
     const res = await fetch(`${address.baseUrl}/articles`, {
@@ -80,6 +80,38 @@ export async function postArticle(
   }
 }
 
-export async function getArticle() {}
+export async function getArticle(
+  articleSlug: string
+): Promise<IArticlePromise> {
+  try {
+    const res = await fetch(`${address.baseUrl}/articles/${articleSlug}`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
 
-export async function getArticles() {}
+    return checkResponse<IArticlePromise>(res);
+  } catch (err) {
+    throw new Error((err as Error).message || "Неизвестная ошибка");
+  }
+}
+
+export async function getArticles(): Promise<IArticlePromise[]> {
+  try {
+    const res = await fetch(`${address.baseUrl}/articles/`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    return checkResponse<IArticlePromise[]>(res);
+  } catch (err) {
+    throw new Error((err as Error).message || "Неизвестная ошибка");
+  }
+}

@@ -3,8 +3,8 @@
 import "./articleDownloadForm.scss";
 
 import {
-  IArticle,
   IArticleData,
+  IArticlePayload,
   ICategoryData,
   ICategoryPromise,
   ITagData,
@@ -182,7 +182,7 @@ export default function ArticleDownloadForm() {
         articleTags = [...selectTags];
       }
 
-      const articlePayload: IArticle = {
+      const articlePayload: IArticlePayload = {
         articleSlug: articleData.articleSlug,
         articleTitle: articleData.articleTitle,
         articleDescription: articleData.articleDescription,

@@ -22,6 +22,7 @@
   }
 
   &__body {
+    margin-top: 60px;
     display: grid;
     grid-template-columns: 1fr minmax(14rem, 25%);
 
@@ -31,12 +32,55 @@
     }
   }
 
+  &__post {
+  }
+
   &__content {
+    padding: 25px 20px 60px 0px;
   }
 
   &__text {
-    padding-bottom: 60px;
     @include m.text-fontsize-small;
+    color: v.$text-color;
+  }
+
+  &__subtitle {
+    padding: 10px 0px;
+    @include m.text-fontsize-large;
+    color: v.$text-color;
+  }
+
+  &__subsubtitle {
+    padding: 7px 0px;
+    @include m.text-fontsize-medium;
+    color: v.$text-color;
+  }
+
+  &__list {
+    margin-left: 35px;
+    color: v.$text-color;
+  }
+
+  &__list-numbered {
+    margin-left: 35px;
+    color: v.$text-color;
+  }
+
+  &__list-item {
+    padding: 7px 0px;
+  }
+
+  &__link {
+    color: v.$blue;
+  }
+
+  &__quote {
+    margin: 15px 0px;
+    padding: 10px;
+    @include m.text-fontsize-large;
     color: v.$main-text-color;
+    border-radius: 15px;
+    border: 1px solid v.$border-color;
+    background-color: v.$background-element-color;
   }
 }

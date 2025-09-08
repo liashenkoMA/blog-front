@@ -30,7 +30,7 @@ export default async function ArticleHeader({
     <section className="articleheader">
       <div className="articleheader__conteiner">
         <div className="articleheader__info">
-          <h1 className="articleheader__title">{props.articleTitle}</h1>
+          <h1 className="articleheader__title">{props.articleH1}</h1>
           <div className="articleheader__author">
             <Link
               href={`/aboutme`}

@@ -47,6 +47,8 @@
     border-radius: 50%;
     border: 1px solid v.$light-blue;
     @include m.hover {
+      transform: translateY(-2px);
+      transition-duration: 0.2s;
       border: 1px solid v.$blue;
       box-shadow: v.$shadow;
     }
@@ -60,6 +62,7 @@
     @include m.text-fontsize-small;
     color: v.$text-color;
     @include m.hover {
+      transition-duration: 0.2s;
       color: v.$blue;
     }
   }

@@ -22,6 +22,23 @@ async function checkResponse<T>(res: Response): Promise<T> {
 
 export async function postCategory() {}
 
+export async function getCategory(slug: string): Promise<ICategoryPromise> {
+  try {
+    const res = await fetch(`${address.baseUrl}/articles/categories/${slug}`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    return checkResponse<ICategoryPromise>(res);
+  } catch (err) {
+    throw new Error((err as Error).message || "Неизвестная ошибка");
+  }
+}
+
 export async function getCategories(): Promise<ICategoryPromise[]> {
   try {
     const res = await fetch(`${address.baseUrl}/articles/categories`, {
@@ -102,6 +119,25 @@ export async function getArticle(
 export async function getArticles(): Promise<IArticlePromise[]> {
   try {
     const res = await fetch(`${address.baseUrl}/articles/`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    return checkResponse<IArticlePromise[]>(res);
+  } catch (err) {
+    throw new Error((err as Error).message || "Неизвестная ошибка");
+  }
+}
+
+export async function getCategoryArticles(
+  slug: string
+): Promise<IArticlePromise[]> {
+  try {
+    const res = await fetch(`${address.baseUrl}/articles/category/${slug}`, {
       method: "GET",
       credentials: "include",
       headers: {

@@ -9,11 +9,11 @@ import { IArticlePromise } from "@/app/_interface/interface";
 import { Metadata } from "next";
 import { CustomMDX } from "@/app/_components/MDXRemote/MdxRemote";
 
-async function loadArticle(articleSlug: string) {
+async function loadArticle(articleSlug: string): Promise<IArticlePromise> {
   const article = await getArticle(articleSlug);
 
   if (!article) {
-    return null;
+    return notFound();
   }
 
   return article;
@@ -22,14 +22,10 @@ async function loadArticle(articleSlug: string) {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ article: string; category: string }>;
+  params: { article: string; category: string };
 }): Promise<Metadata> {
   const awaitedParams = await params;
   const article = await loadArticle(awaitedParams.article);
-
-  if (!article) {
-    return { title: "Статья не найдена" };
-  }
 
   return {
     title: article.articleTitle,
@@ -40,19 +36,15 @@ export async function generateMetadata({
 export default async function Page({
   params,
 }: {
-  params: Promise<{ article: string; category: string }>;
+  params: { article: string; category: string };
 }) {
   const awaitedParams = await params;
   const article = await loadArticle(awaitedParams.article);
 
-  if (!article) {
-    return notFound();
-  }
-
   return (
     <div className="article">
       <ArticleHeader props={article} />
-      <div className="article__body">
+      <div className="article__container">
         <main className="article__content">
           <article className="article__post">
             <Image

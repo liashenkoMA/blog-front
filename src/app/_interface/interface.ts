@@ -57,6 +57,7 @@ export interface IArticlePromise extends IArticleData {
   _id: string;
   createdAt: string;
   updatedAt: string;
+  articleReadingTime: string;
 }
 
 export interface ICategoryData {

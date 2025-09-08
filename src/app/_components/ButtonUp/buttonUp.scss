@@ -14,6 +14,8 @@
     border: 1px solid v.$border-color;
     border-radius: 8px;
     @include m.hover {
+      transform: translateY(-2px);
+      transition-duration: 0.2s;
       cursor: pointer;
       border: 1px solid v.$blue;
       box-shadow: v.$shadow;

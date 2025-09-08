@@ -1,0 +1,39 @@
+@use "../../variables" as v;
+@use "../../mixins" as m;
+
+.pageheader {
+  &__conteiner {
+    width: 100%;
+    padding-bottom: 30px;
+    border-bottom: 1px solid v.$border-color;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    @include m.media-767 {
+      flex-direction: column;
+    }
+  }
+
+  &__image {
+    border-radius: 50%;
+    border: 1px solid v.$light-blue;
+    @include m.hover {
+      transition-duration: 0.2s;
+      border: 1px solid v.$blue;
+      box-shadow: v.$shadow;
+    }
+  }
+
+  &__text-span {
+    @include m.text-fontsize-small;
+    color: v.$text-color;
+  }
+
+  &__title {
+    @include m.header-fontsize-h1;
+    @include m.text-gradient;
+    @include m.media-767 {
+      @include m.text-fontsize-large;
+    }
+  }
+}

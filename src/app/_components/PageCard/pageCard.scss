@@ -1,0 +1,104 @@
+@use "../../variables" as v;
+@use "../../mixins" as m;
+
+.pagecard {
+  max-width: 900px;
+  display: flex;
+
+  @include m.media-767 {
+    max-width: 290px;
+    min-height: 260px;
+    flex-direction: column;
+  }
+
+  &__image {
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid v.$border-color;
+    @include m.media-767 {
+      width: 290px;
+    }
+    @include m.hover {
+      border-color: v.$blue;
+      box-shadow: v.$shadow;
+      transform: translateY(-2px);
+      transition-duration: 0.2s;
+    }
+  }
+
+  &__info {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    @include m.media-767 {
+      padding-left: 0px;
+    }
+  }
+
+  &__categorie-link {
+    padding: 5px 15px;
+    display: block;
+    border: 1px solid v.$border-color;
+    border-radius: 25px;
+    background-color: v.$background-element-color;
+    @include m.text-fontsize-small;
+    color: v.$white;
+    @include m.hover {
+      transform: translateY(-2px);
+      transition-duration: 0.2s;
+      border-color: v.$blue;
+      box-shadow: v.$shadow;
+      color: v.$blue;
+    }
+    @include m.media-767 {
+      margin-top: 20px;
+    }
+  }
+
+  &__title {
+    padding-top: 25px;
+    @include m.text-fontsize-large;
+    color: v.$main-header-text-color;
+    @include m.media-767 {
+      padding-top: 25px;
+    }
+  }
+
+  &__description {
+    padding-top: 20px;
+    @include m.text-fontsize-small;
+    color: v.$text-color;
+  }
+
+  &__times {
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    @include m.media-767 {
+      padding-top: 25px;
+    }
+  }
+
+  &__time {
+    @include m.text-fontsize-small;
+    color: v.$grey;
+    display: flex;
+    align-items: center;
+    &_type_read {
+      margin-left: auto;
+    }
+  }
+
+  &__timeread-icon {
+    padding-right: 4px;
+  }
+
+  &__link_color {
+    @include m.hover {
+      transition-duration: 0.2s;
+      color: v.$blue;
+    }
+  }
+}

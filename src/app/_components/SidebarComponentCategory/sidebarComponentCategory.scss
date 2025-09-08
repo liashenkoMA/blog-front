@@ -17,9 +17,11 @@
       align-items: center;
       color: v.$text-color;
       @include m.hover {
+        transition-duration: 0.2s;
         color: v.$blue;
         border: 1px solid v.$blue;
         box-shadow: v.$shadow;
+        transform: translateY(-2px);
       }
     }
 

@@ -4,6 +4,7 @@
 .blog {
   margin: 0px auto;
   max-width: 1440px;
+  min-height: calc(100vh - 340px);
   @include m.media-1679 {
     max-width: 1280px;
   }

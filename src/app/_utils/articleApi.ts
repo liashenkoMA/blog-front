@@ -133,6 +133,23 @@ export async function getArticles(): Promise<IArticlePromise[]> {
   }
 }
 
+export async function getLastArticles(): Promise<IArticlePromise[]> {
+  try {
+    const res = await fetch(`${address.baseUrl}/articles/last`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    return checkResponse<IArticlePromise[]>(res);
+  } catch (err) {
+    throw new Error((err as Error).message || "Неизвестная ошибка");
+  }
+}
+
 export async function getCategoryArticles(
   slug: string
 ): Promise<IArticlePromise[]> {

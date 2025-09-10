@@ -8,7 +8,7 @@ import Sidebar from "@/app/_components/Sidebar/Sidebar";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Все статьи моего блога!",
+  title: "Блог",
   description:
     "На этой странице вы можете найти все доступные на данный момент статьи моего блога. Надеюсь они вам понравятся.",
 };
@@ -34,4 +34,3 @@ export default async function Page() {
     </div>
   );
 }
-

@@ -12,8 +12,8 @@ import ButtonUp from "../_components/ButtonUp/ButtonUp";
 const ubuntu = Roboto({ subsets: ["latin"], weight: ["300", "400", "500"] });
 
 export const metadata: Metadata = {
-  title: "Мой блог",
-  description: "Мой блог на Nextjs и Nestjs",
+  title: "Мой блог на nextjs",
+  description: "Мой блог на Nextjs и Nestjs. БД - mongodb. Написал на TS",
 };
 
 export default async function RootLayout({

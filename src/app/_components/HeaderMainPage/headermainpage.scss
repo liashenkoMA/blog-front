@@ -1,0 +1,131 @@
+@use "../../mixins" as m;
+@use "../../variables" as v;
+
+.headermainpage {
+  width: 100%;
+  padding-top: 128px;
+  padding-bottom: 128px;
+  background-color: v.$background-element-color;
+
+  @include m.media-767 {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  &__container {
+    max-width: 1280px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: space-between;
+    @include m.media-1679 {
+      align-items: center;
+    }
+    @include m.media-1439 {
+      flex-direction: column;
+      max-width: 768px;
+    }
+    @include m.media-1023 {
+      max-width: 680px;
+    }
+    @include m.media-767 {
+      max-width: 290px;
+    }
+  }
+
+  &__profile {
+    max-width: 560px;
+  }
+
+  &__text {
+    @include m.text-fontsize-medium;
+    color: v.$text-color;
+  }
+
+  &__title_type_color {
+    --caret: currentcolor;
+    @include m.text-gradient;
+  }
+
+  @include m.text-writer-home;
+
+  &__title_type_color::before {
+    content: "";
+    animation: typing 15s infinite;
+  }
+
+  &__title_type_color::after {
+    content: "";
+    border-right: 1px solid var(--caret);
+    animation: blink 0.5s linear infinite;
+  }
+
+  &__title {
+    padding: 10px 0px 20px 0px;
+    @include m.header-fontsize-h1;
+    color: v.$white;
+    @include m.media-767 {
+      @include m.text-fontsize-x-large;
+    }
+  }
+
+  &__images {
+    max-width: 840px;
+    position: relative;
+    @include m.media-1679 {
+      max-width: 540px;
+    }
+  }
+
+  &__image {
+    border-radius: 16px;
+    border: 1px solid v.$border-color;
+  }
+
+  &__image_position_on {
+    position: relative;
+    z-index: 2;
+    animation: movingY 10s ease infinite alternate;
+    @include m.media-1679 {
+      animation: none;
+      z-index: 0;
+      width: 462px;
+      height: 556px;
+      margin-top: 60px;
+    }
+    @include m.media-767 {
+      width: 290px;
+      height: 320px;
+    }
+  }
+
+  &__image_position_under {
+    position: absolute;
+    z-index: 0;
+    top: 150px;
+    right: 190px;
+    animation: movingX 10s ease infinite alternate;
+    @include m.media-1679 {
+      display: none;
+    }
+  }
+
+  @keyframes movingY {
+    from {
+      translate: 0 -64px;
+    }
+
+    to {
+      translate: 0 20px;
+    }
+  }
+
+  @keyframes movingX {
+    from {
+      translate: -60px 0;
+    }
+
+    to {
+      translate: 40px 0;
+    }
+  }
+}

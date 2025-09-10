@@ -1,0 +1,79 @@
+@use "../../variables" as v;
+@use "../../mixins" as m;
+
+.lastarticles {
+  margin: 0px auto;
+  padding-bottom: 60px;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  @include m.media-1679 {
+    max-width: 1280px;
+  }
+  @include m.media-1439 {
+    max-width: 768px;
+  }
+  @include m.media-1023 {
+    max-width: 680px;
+  }
+  @include m.media-767 {
+    max-width: 290px;
+    align-items: center;
+  }
+
+  &__info {
+    padding: 60px 0px 0px 0px;
+  }
+
+  &__title {
+    @include m.header-fontsize-h2;
+    @include m.text-gradient;
+    @include m.media-767 {
+      @include m.text-fontsize-large;
+    }
+  }
+
+  &__text {
+    padding-top: 10px;
+    @include m.text-fontsize-medium;
+    color: v.$text-color;
+  }
+
+  &__container {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 1fr minmax(14rem, 25%);
+    @include m.media-1023 {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    @include m.media-767 {
+      padding-bottom: 60px;
+    }
+  }
+
+  &__link {
+    margin-top: 30px;
+    display: flex;
+    width: 234px;
+    height: 56px;
+    align-items: center;
+    justify-content: center;
+    @include m.text-fontsize-medium;
+    background-color: v.$light-blue;
+    border: none;
+    border-radius: 80px;
+    @include m.hover {
+      cursor: pointer;
+      box-shadow: v.$shadow;
+    }
+    @include m.media-767 {
+      margin-top: 0;
+    }
+  }
+}

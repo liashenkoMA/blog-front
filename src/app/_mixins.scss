@@ -139,3 +139,141 @@
     }
   }
 }
+
+@mixin text-writer-home {
+  @keyframes typing {
+    0.0000%,
+    27.3488% {
+      content: "";
+    }
+    1.1395%,
+    26.2093% {
+      content: "C";
+    }
+    2.2791%,
+    25.0698% {
+      content: "Cr";
+    }
+    3.4186%,
+    23.9302% {
+      content: "Cre";
+    }
+    4.5581%,
+    22.7907% {
+      content: "Crea";
+    }
+    5.6977%,
+    21.6512% {
+      content: "Creat";
+    }
+    6.8372%,
+    20.5116% {
+      content: "Creato";
+    }
+    7.9767%,
+    19.3721% {
+      content: "Creator";
+    }
+
+    30.7674%,
+    51.2791% {
+      content: "";
+    }
+    31.9070%,
+    50.1395% {
+      content: "G";
+    }
+    33.0465%,
+    49.0000% {
+      content: "Ga";
+    }
+    34.1860%,
+    47.8605% {
+      content: "Gam";
+    }
+    35.3256%,
+    46.7209% {
+      content: "Game";
+    }
+    36.4651%,
+    45.5814% {
+      content: "Gamer";
+    }
+
+    54.6977%,
+    90.2093% {
+      content: "";
+    }
+    55.8372%,
+    89.0698% {
+      content: "M";
+    }
+    56.9767%,
+    88.9302% {
+      content: "Ma";
+    }
+    58.1163%,
+    87.7907% {
+      content: "Mak";
+    }
+    59.2558%,
+    86.6512% {
+      content: "Makc";
+    }
+    60.3953%,
+    85.5116% {
+      content: "Makci";
+    }
+    61.5349%,
+    84.3721% {
+      content: "Makcim";
+    }
+
+    62.6279%,
+    83.8605% {
+      content: "Makcim L";
+    }
+    63.7674%,
+    82.7209% {
+      content: "Makcim Ly";
+    }
+    64.9070%,
+    81.5814% {
+      content: "Makcim Lya";
+    }
+    65.0465%,
+    80.4419% {
+      content: "Makcim Lyas";
+    }
+    66.1860%,
+    79.3023% {
+      content: "Makcim Lyash";
+    }
+    67.3256%,
+    78.1628% {
+      content: "Makcim Lyashe";
+    }
+    68.3356%,
+    77.1527% {
+      content: "Makcim Lyashen";
+    }
+    69.5256%,
+    76.1428% {
+      content: "Makcim Lyashenk";
+    }
+    70.3256%,
+    75.1246% {
+      content: "Makcim Lyashenko";
+    }
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+}

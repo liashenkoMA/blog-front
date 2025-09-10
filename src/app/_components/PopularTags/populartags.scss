@@ -1,0 +1,52 @@
+@use "../../variables" as v;
+@use "../../mixins" as m;
+
+.populartags {
+  margin: 0px auto;
+  padding-bottom: 60px;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  @include m.media-1679 {
+    max-width: 1280px;
+  }
+  @include m.media-1439 {
+    max-width: 768px;
+  }
+  @include m.media-1023 {
+    max-width: 680px;
+  }
+  @include m.media-767 {
+    max-width: 290px;
+    align-items: center;
+  }
+
+  &__info {
+    padding: 60px 0px 0px 0px;
+  }
+
+  &__title {
+    @include m.header-fontsize-h2;
+    @include m.text-gradient;
+    @include m.media-767 {
+      @include m.text-fontsize-large;
+    }
+  }
+
+  &__text {
+    padding-top: 10px;
+    @include m.text-fontsize-medium;
+    color: v.$text-color;
+  }
+
+  &__content {
+    padding-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+    @include m.media-767 {
+      justify-content: center;
+    }
+  }
+}

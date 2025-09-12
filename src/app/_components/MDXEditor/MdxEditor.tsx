@@ -28,6 +28,7 @@ import {
   sandpackPlugin,
   SandpackConfig,
   codeMirrorPlugin,
+  linkDialogPlugin,
 } from "@mdxeditor/editor";
 
 interface EditorProps {
@@ -71,11 +72,12 @@ export default function Editor({ markdown, onChange, editorRef }: EditorProps) {
         markdownShortcutPlugin(),
         imagePlugin(),
         linkPlugin(),
+        linkDialogPlugin(),
         toolbarPlugin({
           toolbarContents: () => (
             <>
-              <UndoRedo />
               <BoldItalicUnderlineToggles />
+              <UndoRedo />
               <ListsToggle />
               <BlockTypeSelect />
               <CodeToggle />

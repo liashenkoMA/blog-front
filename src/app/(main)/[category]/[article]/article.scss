@@ -32,9 +32,6 @@
     }
   }
 
-  &__post {
-  }
-
   &__post-image {
     width: 100%;
     border-radius: 30px;
@@ -53,48 +50,102 @@
     }
   }
 
+  &__post {
+    @include m.media-767 {
+      width: 290px;
+    }
+  }
+
+  &__quote {
+    margin: 20px 0px;
+    padding: 20px 10px 5px 50px;
+    border-radius: 15px;
+    border: 1px solid v.$border-color;
+    background-color: v.$background-element-color;
+    position: relative;
+  }
+
+  &__quote::before {
+    content: "";
+    position: absolute;
+    background: url(../../../_images/quote.svg) no-repeat center;
+    left: 15px;
+    top: 15px;
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+  }
+
   &__text {
+    padding-bottom: 15px;
     @include m.text-fontsize-small;
     color: v.$text-color;
   }
 
   &__subtitle {
-    padding: 10px 0px;
+    padding: 15px 0px 20px 0px;
     @include m.text-fontsize-large;
     color: v.$text-color;
+    @include m.media-767 {
+      max-width: 290px;
+      word-wrap: break-word;
+    }
   }
 
   &__subsubtitle {
-    padding: 7px 0px;
+    padding: 20px 0px 15px 0px;
     @include m.text-fontsize-medium;
     color: v.$text-color;
   }
 
-  &__list {
-    margin-left: 35px;
+  &__lists {
+    margin: 0px 0px 20px 40px;
     color: v.$text-color;
   }
 
-  &__list-numbered {
-    margin-left: 35px;
+  &__lists-numbered {
+    margin: 0px 0px 20px 40px;
     color: v.$text-color;
   }
 
   &__list-item {
     padding: 7px 0px;
+    @include m.text-fontsize-small;
+    color: v.$text-color;
+    @include m.media-767 {
+      max-width: 290px;
+      word-wrap: break-word;
+    }
   }
 
   &__link {
     color: v.$blue;
+    @include m.hover {
+      color: v.$light-blue;
+    }
   }
 
-  &__quote {
-    margin: 15px 0px;
-    padding: 10px;
-    @include m.text-fontsize-large;
-    color: v.$main-text-color;
-    border-radius: 15px;
-    border: 1px solid v.$border-color;
-    background-color: v.$background-element-color;
+  &__underline {
+    @include m.text-fontsize-small;
+    color: v.$text-color;
+  }
+
+  &__bold {
+    @include m.text-fontsize-small;
+    color: v.$text-color;
+  }
+
+  &__strong {
+    @include m.text-fontsize-small;
+    color: v.$text-color;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    @include m.media-767 {
+      width: 290px;
+      height: 240px;
+    }
   }
 }

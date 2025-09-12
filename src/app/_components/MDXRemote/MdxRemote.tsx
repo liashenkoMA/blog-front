@@ -1,5 +1,6 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import React, { ReactNode } from "react";
+import Image from "next/image";
 
 const components = {
   p: ({
@@ -30,7 +31,7 @@ const components = {
     children,
     ...props
   }: React.HTMLAttributes<HTMLUListElement> & { children?: ReactNode }) => (
-    <ul {...props} className="article__list">
+    <ul {...props} className="article__lists">
       {children}
     </ul>
   ),
@@ -38,7 +39,7 @@ const components = {
     children,
     ...props
   }: React.HTMLAttributes<HTMLOListElement> & { children?: ReactNode }) => (
-    <ol {...props} className="article__list-numbered">
+    <ol {...props} className="article__lists-numbered">
       {children}
     </ol>
   ),
@@ -60,6 +61,30 @@ const components = {
       {children}
     </a>
   ),
+  strong: ({
+    children,
+    ...props
+  }: React.HTMLAttributes<HTMLElement> & { children?: ReactNode }) => (
+    <strong {...props} className="article__strong">
+      {children}
+    </strong>
+  ),
+  u: ({
+    children,
+    ...props
+  }: React.HTMLAttributes<HTMLElement> & { children?: ReactNode }) => (
+    <u {...props} className="article__underline">
+      {children}
+    </u>
+  ),
+  b: ({
+    children,
+    ...props
+  }: React.HTMLAttributes<HTMLElement> & { children?: ReactNode }) => (
+    <b {...props} className="article__bold">
+      {children}
+    </b>
+  ),
   blockquote: ({
     children,
     ...props
@@ -70,6 +95,24 @@ const components = {
       {children}
     </blockquote>
   ),
+  img: ({
+    src,
+    alt,
+    width,
+    height,
+  }: React.ImgHTMLAttributes<HTMLImageElement>) => {
+    if (!src) return null;
+
+    return (
+      <Image
+        src={src}
+        alt={alt ?? ""}
+        width={width ? Number(width) : 800} // дефолтная ширина
+        height={height ? Number(height) : 600} // дефолтная высота
+        className="article__img"
+      />
+    );
+  },
 };
 
 export function CustomMDX({

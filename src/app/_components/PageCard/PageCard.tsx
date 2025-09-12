@@ -45,10 +45,10 @@ export default function PageCard({ page }: { page: IArticlePromise }) {
           href={`${page.articleCategory.categorySlug}/${page.articleSlug}`}
           className="pagecard__title  pagecard__link_color"
         >
-          {page.articleH1}
+          {`${page.articleH1.slice(0, 60)}...`}
         </Link>
         <p className="pagecard__description">
-          {`${page.article.slice(0, 250)}...`}
+          {`${page.article.slice(0, 200)}...`}
         </p>
         <div className="pagecard__times">
           <p className="pagecard__time pagecard__time_type_publick">

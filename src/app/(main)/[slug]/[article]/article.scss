@@ -136,7 +136,6 @@
   }
 
   &__strong {
-    @include m.text-fontsize-small;
     color: v.$text-color;
   }
 

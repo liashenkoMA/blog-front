@@ -22,16 +22,21 @@ async function checkResponse<T>(res: Response): Promise<T> {
 
 export async function postCategory() {}
 
-export async function getCategory(slug: string): Promise<ICategoryPromise> {
+export async function getCategory(
+  categorySlug: string
+): Promise<ICategoryPromise> {
   try {
-    const res = await fetch(`${address.baseUrl}/articles/categories/${slug}`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `${address.baseUrl}/articles/categories/${categorySlug}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     return checkResponse<ICategoryPromise>(res);
   } catch (err) {
@@ -58,7 +63,22 @@ export async function getCategories(): Promise<ICategoryPromise[]> {
 
 // === TAG ===
 
-export async function postTag() {}
+export async function getTag(tagSlug: string): Promise<ITagPromise> {
+  try {
+    const res = await fetch(`${address.baseUrl}/articles/tags/${tagSlug}`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    return checkResponse<ITagPromise>(res);
+  } catch (err) {
+    throw new Error((err as Error).message || "Неизвестная ошибка");
+  }
+}
 
 export async function getTags(): Promise<ITagPromise[]> {
   try {
@@ -151,17 +171,42 @@ export async function getLastArticles(): Promise<IArticlePromise[]> {
 }
 
 export async function getCategoryArticles(
-  slug: string
+  categorySlug: string
 ): Promise<IArticlePromise[]> {
   try {
-    const res = await fetch(`${address.baseUrl}/articles/category/${slug}`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `${address.baseUrl}/articles/categoryarticles/${categorySlug}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return checkResponse<IArticlePromise[]>(res);
+  } catch (err) {
+    throw new Error((err as Error).message || "Неизвестная ошибка");
+  }
+}
+
+export async function getTagArticles(
+  tagSlug: string
+): Promise<IArticlePromise[]> {
+  try {
+    const res = await fetch(
+      `${address.baseUrl}/articles/tagsarticles/${tagSlug}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     return checkResponse<IArticlePromise[]>(res);
   } catch (err) {

@@ -7,9 +7,9 @@ import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
 import Search from "../Search/Search";
 import Socials from "../Socials/Socials";
-import { IUser } from "@/app/_interface/interface";
+import { IUserResponse } from "@/app/_interface/interface";
 
-export default function Header({ user }: { user: IUser }) {
+export default function Header({ user }: { user: IUserResponse }) {
   const [isOpen, setIsOpen] = useState(true);
 
   function isOpenMenu() {

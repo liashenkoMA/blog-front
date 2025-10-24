@@ -5,11 +5,11 @@ import Image from "next/image";
 import { getArticle, getArticles } from "@/app/_utils/articleApi";
 import { notFound } from "next/navigation";
 import ArticleHeader from "@/app/_components/ArticleHeader/ArticleHeader";
-import { IArticlePromise } from "@/app/_interface/interface";
+import { IArticleResponse } from "@/app/_interface/interface";
 import { Metadata } from "next";
 import { CustomMDX } from "@/app/_components/MDXRemote/MdxRemote";
 
-async function loadArticle(articleSlug: string): Promise<IArticlePromise> {
+async function loadArticle(articleSlug: string): Promise<IArticleResponse> {
   const article = await getArticle(articleSlug);
 
   if (!article) {
@@ -66,7 +66,7 @@ export default async function Page({
 export async function generateStaticParams() {
   const articles = await getArticles();
 
-  return articles.map((article: IArticlePromise) => ({
+  return articles.map((article: IArticleResponse) => ({
     category: article.articleCategory.categorySlug,
     article: article.articleSlug,
   }));

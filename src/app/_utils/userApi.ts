@@ -1,4 +1,4 @@
-import { IUser, IUserSocials } from "../_interface/interface";
+import { IUserResponse, IUserSocials } from "../_interface/interface";
 
 const address = {
   baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -12,7 +12,7 @@ async function checkResponse<T>(res: Response): Promise<T> {
   return result;
 }
 
-export function getUserData(): Promise<IUser> {
+export function getUserData(): Promise<IUserResponse> {
   return fetch(`${address.baseUrl}/user/`, {
     method: "GET",
     credentials: "include",
@@ -21,7 +21,7 @@ export function getUserData(): Promise<IUser> {
       "Content-Type": "application/json",
     },
   })
-    .then(checkResponse<IUser>)
+    .then(checkResponse<IUserResponse>)
     .catch((err: Error) => {
       throw new Error(err.message || "Неизвестная ошибка");
     });

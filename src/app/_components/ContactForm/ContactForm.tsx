@@ -1,5 +1,5 @@
-import { telegramBot } from "@/app/_utils/telegramApi";
 import "./contactform.scss";
+import { telegramBot } from "@/app/_utils/telegramApi";
 
 export default function ContactForm() {
   return (

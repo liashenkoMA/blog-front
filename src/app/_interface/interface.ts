@@ -16,8 +16,11 @@ export interface IUser extends IUserSocials {
   name: string;
   email: string;
   familyName: string;
-  _id: number;
   mySite: string;
+}
+
+export interface IUserResponse extends IUser {
+  _id: number;
 }
 
 export interface IUserProps {
@@ -50,7 +53,7 @@ export interface IArticlePayload extends IArticleData {
   articleTags: (string | ITagData)[];
 }
 
-export interface IArticlePromise extends IArticleData {
+export interface IArticleResponse extends IArticleData {
   article: string;
   articleCategory: ICategoryData;
   articleTags: ITagData[];
@@ -69,7 +72,7 @@ export interface ICategoryData {
   categoryDescription: string;
 }
 
-export interface ICategoryPromise extends ICategoryData {
+export interface ICategoryResponse extends ICategoryData {
   _id: string;
 }
 
@@ -82,7 +85,7 @@ export interface ITagData {
   tagDescription: string;
 }
 
-export interface ITagPromise extends ITagData {
+export interface ITagResponse extends ITagData {
   _id: string;
 }
 

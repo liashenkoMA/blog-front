@@ -8,6 +8,7 @@ import Header from "../_components/Header/Header";
 import Footer from "../_components/Footer/Footer";
 import { getUserData } from "../_utils/userApi";
 import ButtonUp from "../_components/ButtonUp/ButtonUp";
+import { IUserResponse } from "../_interface/interface";
 
 const ubuntu = Roboto({ subsets: ["latin"], weight: ["300", "400", "500"] });
 
@@ -21,7 +22,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getUserData();
+  const user: IUserResponse = await getUserData();
 
   return (
     <html lang="ru">

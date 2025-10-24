@@ -2,9 +2,10 @@ import "./populartags.scss";
 
 import { getTags } from "@/app/_utils/articleApi";
 import TagCard from "../TagCard/TagCard";
+import { ITagResponse } from "@/app/_interface/interface";
 
 export default async function Page() {
-  const tags = await getTags();
+  const tags: ITagResponse[] = await getTags();
 
   return (
     <section className="populartags">

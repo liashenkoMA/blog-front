@@ -1,12 +1,12 @@
 import "./sidebarComponentCategory.scss";
-import { ICategoryPromise } from "@/app/_interface/interface";
+import { ICategoryResponse } from "@/app/_interface/interface";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function SidebarComponentCategory({
   categories,
 }: {
-  categories: ICategoryPromise;
+  categories: ICategoryResponse;
 }) {
   return (
     <li className="sidebar__component_category_list">

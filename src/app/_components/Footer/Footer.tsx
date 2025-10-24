@@ -1,9 +1,9 @@
 import "./footer.scss";
 
 import Socials from "../Socials/Socials";
-import { IUser } from "@/app/_interface/interface";
+import { IUserResponse } from "@/app/_interface/interface";
 
-export default function Footer({ user }: { user: IUser }) {
+export default function Footer({ user }: { user: IUserResponse }) {
   return (
     <footer className="footer">
       <div className="footer__content">

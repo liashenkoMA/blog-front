@@ -2,9 +2,9 @@ import "./tagcard.scss";
 
 import Image from "next/image";
 import Link from "next/link";
-import { ITagPromise } from "@/app/_interface/interface";
+import { ITagResponse } from "@/app/_interface/interface";
 
-export default function TagCard({ tag }: { tag: ITagPromise }) {
+export default function TagCard({ tag }: { tag: ITagResponse }) {
   return (
     <div className="tagcard">
       <Link href={`/${tag.tagSlug}`} className="tagcard__link">

@@ -1,12 +1,12 @@
 import "./pageCard.scss";
 
-import { IArticlePromise } from "@/app/_interface/interface";
+import { IArticleResponse } from "@/app/_interface/interface";
 import Image from "next/image";
 import Link from "next/link";
 import time from "@/app/_images/Time.png";
 import calendar from "@/app/_images/Calendar.png";
 
-export default function PageCard({ page }: { page: IArticlePromise }) {
+export default function PageCard({ page }: { page: IArticleResponse }) {
   function getISODate(date: string) {
     const formattedDate = new Date(date);
 

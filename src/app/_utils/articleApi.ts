@@ -1,8 +1,8 @@
 import {
   IArticlePayload,
-  IArticlePromise,
-  ICategoryPromise,
-  ITagPromise,
+  IArticleResponse,
+  ICategoryResponse,
+  ITagResponse,
 } from "../_interface/interface";
 
 const address = {
@@ -24,7 +24,7 @@ export async function postCategory() {}
 
 export async function getCategory(
   categorySlug: string
-): Promise<ICategoryPromise> {
+): Promise<ICategoryResponse> {
   try {
     const res = await fetch(
       `${address.baseUrl}/articles/categories/${categorySlug}`,
@@ -38,13 +38,13 @@ export async function getCategory(
       }
     );
 
-    return checkResponse<ICategoryPromise>(res);
+    return checkResponse<ICategoryResponse>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }
 }
 
-export async function getCategories(): Promise<ICategoryPromise[]> {
+export async function getCategories(): Promise<ICategoryResponse[]> {
   try {
     const res = await fetch(`${address.baseUrl}/articles/categories`, {
       method: "GET",
@@ -55,7 +55,7 @@ export async function getCategories(): Promise<ICategoryPromise[]> {
       },
     });
 
-    return checkResponse<ICategoryPromise[]>(res);
+    return checkResponse<ICategoryResponse[]>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }
@@ -63,7 +63,7 @@ export async function getCategories(): Promise<ICategoryPromise[]> {
 
 // === TAG ===
 
-export async function getTag(tagSlug: string): Promise<ITagPromise> {
+export async function getTag(tagSlug: string): Promise<ITagResponse> {
   try {
     const res = await fetch(`${address.baseUrl}/articles/tags/${tagSlug}`, {
       method: "GET",
@@ -74,13 +74,13 @@ export async function getTag(tagSlug: string): Promise<ITagPromise> {
       },
     });
 
-    return checkResponse<ITagPromise>(res);
+    return checkResponse<ITagResponse>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }
 }
 
-export async function getTags(): Promise<ITagPromise[]> {
+export async function getTags(): Promise<ITagResponse[]> {
   try {
     const res = await fetch(`${address.baseUrl}/articles/tags`, {
       method: "GET",
@@ -91,7 +91,7 @@ export async function getTags(): Promise<ITagPromise[]> {
       },
     });
 
-    return checkResponse<ITagPromise[]>(res);
+    return checkResponse<ITagResponse[]>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }
@@ -101,7 +101,7 @@ export async function getTags(): Promise<ITagPromise[]> {
 
 export async function postArticle(
   articlePayload: IArticlePayload
-): Promise<IArticlePromise> {
+): Promise<IArticleResponse> {
   try {
     const res = await fetch(`${address.baseUrl}/articles`, {
       method: "POST",
@@ -111,7 +111,7 @@ export async function postArticle(
       body: JSON.stringify(articlePayload),
     });
 
-    return checkResponse<IArticlePromise>(res);
+    return checkResponse<IArticleResponse>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }
@@ -119,7 +119,7 @@ export async function postArticle(
 
 export async function getArticle(
   articleSlug: string
-): Promise<IArticlePromise> {
+): Promise<IArticleResponse> {
   try {
     const res = await fetch(`${address.baseUrl}/articles/${articleSlug}`, {
       method: "GET",
@@ -130,13 +130,13 @@ export async function getArticle(
       },
     });
 
-    return checkResponse<IArticlePromise>(res);
+    return checkResponse<IArticleResponse>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }
 }
 
-export async function getArticles(): Promise<IArticlePromise[]> {
+export async function getArticles(): Promise<IArticleResponse[]> {
   try {
     const res = await fetch(`${address.baseUrl}/articles/`, {
       method: "GET",
@@ -147,13 +147,13 @@ export async function getArticles(): Promise<IArticlePromise[]> {
       },
     });
 
-    return checkResponse<IArticlePromise[]>(res);
+    return checkResponse<IArticleResponse[]>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }
 }
 
-export async function getLastArticles(): Promise<IArticlePromise[]> {
+export async function getLastArticles(): Promise<IArticleResponse[]> {
   try {
     const res = await fetch(`${address.baseUrl}/articles/last`, {
       method: "GET",
@@ -164,7 +164,7 @@ export async function getLastArticles(): Promise<IArticlePromise[]> {
       },
     });
 
-    return checkResponse<IArticlePromise[]>(res);
+    return checkResponse<IArticleResponse[]>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }
@@ -172,7 +172,7 @@ export async function getLastArticles(): Promise<IArticlePromise[]> {
 
 export async function getCategoryArticles(
   categorySlug: string
-): Promise<IArticlePromise[]> {
+): Promise<IArticleResponse[]> {
   try {
     const res = await fetch(
       `${address.baseUrl}/articles/categoryarticles/${categorySlug}`,
@@ -186,7 +186,7 @@ export async function getCategoryArticles(
       }
     );
 
-    return checkResponse<IArticlePromise[]>(res);
+    return checkResponse<IArticleResponse[]>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }
@@ -194,7 +194,7 @@ export async function getCategoryArticles(
 
 export async function getTagArticles(
   tagSlug: string
-): Promise<IArticlePromise[]> {
+): Promise<IArticleResponse[]> {
   try {
     const res = await fetch(
       `${address.baseUrl}/articles/tagsarticles/${tagSlug}`,
@@ -208,7 +208,7 @@ export async function getTagArticles(
       }
     );
 
-    return checkResponse<IArticlePromise[]>(res);
+    return checkResponse<IArticleResponse[]>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }

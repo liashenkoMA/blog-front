@@ -13,11 +13,11 @@ import {
 } from "@/app/_utils/articleApi";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { ICategoryPromise, ITagPromise } from "@/app/_interface/interface";
+import { ICategoryResponse, ITagResponse } from "@/app/_interface/interface";
 
 async function loadCategoryOrTag(
   slug: string
-): Promise<{ type: "category" | "tag"; data: ICategoryPromise | ITagPromise }> {
+): Promise<{ type: "category" | "tag"; data: ICategoryResponse | ITagResponse }> {
   const [categoryResult, tagResult] = await Promise.allSettled([
     getCategory(slug),
     getTag(slug),
@@ -45,12 +45,12 @@ export async function generateMetadata({
   return {
     title:
       type === "category"
-        ? (data as ICategoryPromise).categoryTitle
-        : (data as ITagPromise).tagTitle,
+        ? (data as ICategoryResponse).categoryTitle
+        : (data as ITagResponse).tagTitle,
     description:
       type === "category"
-        ? (data as ICategoryPromise).categoryDescription
-        : (data as ITagPromise).tagDescription,
+        ? (data as ICategoryResponse).categoryDescription
+        : (data as ITagResponse).tagDescription,
   };
 }
 
@@ -69,18 +69,18 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <PageHeader
         img={
           type === "category"
-            ? (data as ICategoryPromise).categoryImage
-            : (data as ITagPromise).tagImage
+            ? (data as ICategoryResponse).categoryImage
+            : (data as ITagResponse).tagImage
         }
         alt={
           type === "category"
-            ? (data as ICategoryPromise).categoryImageAlt
-            : (data as ITagPromise).tagImageAlt
+            ? (data as ICategoryResponse).categoryImageAlt
+            : (data as ITagResponse).tagImageAlt
         }
         title={
           type === "category"
-            ? (data as ICategoryPromise).categoryTitle
-            : (data as ITagPromise).tagTitle
+            ? (data as ICategoryResponse).categoryTitle
+            : (data as ITagResponse).tagTitle
         }
       />
       <div className="category__container">
@@ -98,11 +98,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
 export async function generateStaticParams() {
   const [categories, tags] = await Promise.all([getCategories(), getTags()]);
 
-  const categoriesParams = categories.map((category: ICategoryPromise) => ({
+  const categoriesParams = categories.map((category: ICategoryResponse) => ({
     slug: category.categorySlug,
   }));
 
-  const tagParams = tags.map((tag: ITagPromise) => ({
+  const tagParams = tags.map((tag: ITagResponse) => ({
     slug: tag.tagSlug,
   }));
 

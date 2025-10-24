@@ -1,8 +1,8 @@
-import { getUserData } from "@/app/_utils/userApi";
 import "./articleheader.scss";
 import Image from "next/image";
 import Link from "next/link";
-import { IArticlePromise } from "@/app/_interface/interface";
+import { IArticleResponse } from "@/app/_interface/interface";
+import { getUserData } from "@/app/_utils/userApi";
 
 import tg from "@/app/_images/Telegram.svg";
 import vk from "@/app/_images/VK.svg";
@@ -10,7 +10,7 @@ import vk from "@/app/_images/VK.svg";
 export default async function ArticleHeader({
   props,
 }: {
-  props: IArticlePromise;
+  props: IArticleResponse;
 }) {
   const author = await getUserData();
 

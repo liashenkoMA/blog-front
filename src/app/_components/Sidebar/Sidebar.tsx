@@ -1,7 +1,7 @@
 import "./sidebar.scss";
 
 import SidebarComponent from "../SidebarComponent/SidebarComponent";
-import { ICategoryPromise } from "@/app/_interface/interface";
+import { ICategoryResponse } from "@/app/_interface/interface";
 import SidebarComponentCategory from "../SidebarComponentCategory/SidebarComponentCategory";
 import { getCategories } from "@/app/_utils/articleApi";
 
@@ -10,7 +10,7 @@ export default async function Sidebar() {
 
   return (
     <aside className="sidebar">
-      <SidebarComponent<ICategoryPromise>
+      <SidebarComponent<ICategoryResponse>
         title="Categories"
         sidebarData={categories}
         renderItem={(item) => (

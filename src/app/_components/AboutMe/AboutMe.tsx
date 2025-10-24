@@ -5,10 +5,10 @@ import Profile from "../Profile/Profile";
 import Skills from "../Skills/Skills";
 import ContactForm from "../ContactForm/ContactForm";
 import { getUserData } from "@/app/_utils/userApi";
-import { IUser } from "@/app/_interface/interface";
+import { IUserResponse } from "@/app/_interface/interface";
 
 export default async function AboutMe() {
-  const user: IUser = await getUserData();
+  const user: IUserResponse = await getUserData();
 
   return (
     <main className="main">

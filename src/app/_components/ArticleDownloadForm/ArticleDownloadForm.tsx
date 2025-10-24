@@ -6,9 +6,9 @@ import {
   IArticleData,
   IArticlePayload,
   ICategoryData,
-  ICategoryPromise,
+  ICategoryResponse,
   ITagData,
-  ITagPromise,
+  ITagResponse,
 } from "@/app/_interface/interface";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
@@ -36,7 +36,7 @@ export default function ArticleDownloadForm() {
     articleH1: "",
   });
 
-  const [categories, setCategories] = useState<ICategoryPromise[]>([]);
+  const [categories, setCategories] = useState<ICategoryResponse[]>([]);
   const [selectCategory, setSelectCategory] = useState("");
   const [categoryData, setCategoryData] = useState<ICategoryData>({
     categorySlug: "",
@@ -47,7 +47,7 @@ export default function ArticleDownloadForm() {
     categoryDescription: "",
   });
 
-  const [tags, setTags] = useState<ITagPromise[]>([]);
+  const [tags, setTags] = useState<ITagResponse[]>([]);
   const [selectTags, setSelectTags] = useState<string[]>([]);
   const [tagData, setTagData] = useState<ITagData>({
     tagSlug: "",

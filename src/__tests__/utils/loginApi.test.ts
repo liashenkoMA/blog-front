@@ -9,7 +9,7 @@ jest.mock("next/headers", () => ({
   })),
 }));
 
-describe("login API", () => {
+describe("login Api", () => {
   const mockFetch = fetch as jest.MockedFunction<typeof fetch>;
   let formData: FormData;
 

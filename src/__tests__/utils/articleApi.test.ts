@@ -1,9 +1,22 @@
-import { ICategoryResponse, ITagResponse } from "@/app/_interface/interface";
 import {
+  IArticlePayload,
+  IArticleResponse,
+  ICategoryData,
+  ICategoryResponse,
+  ITagData,
+  ITagResponse,
+} from "@/app/_interface/interface";
+import {
+  getArticle,
+  getArticles,
   getCategories,
   getCategory,
+  getCategoryArticles,
+  getLastArticles,
   getTag,
+  getTagArticles,
   getTags,
+  postArticle,
 } from "@/app/_utils/articleApi";
 
 global.fetch = jest.fn();
@@ -290,11 +303,563 @@ describe("article Api", () => {
   // === ARTICLE ===
 
   describe("Article", () => {
-    describe("postArticle", () => {});
-    describe("getArticle", () => {});
-    describe("getArticles", () => {});
-    describe("getLastArticles", () => {});
-    describe("getCategoryArticles", () => {});
-    describe("getTagArticles", () => {});
+    describe("postArticle", () => {
+      const mockPayload: IArticlePayload = {
+        articleSlug: "test-slug",
+        articleTitle: "Test Title",
+        articleDescription: "Короткое описание для теста",
+        articleImg: "test.jpg",
+        articleImgAlt: "alt text",
+        articleH1: "Заголовок H1 для теста",
+        article: "Полный текст статьи для теста.",
+        articleCategory: {
+          categorySlug: "category-1",
+          categoryName: "Категория 1",
+          categoryImage: "category1.jpg",
+          categoryImageAlt: "Категория 1 — изображение",
+          categoryTitle: "Title категории 1",
+          categoryDescription: "Описание категории 1",
+        },
+        articleTags: [
+          {
+            tagSlug: "tag-1",
+            tagName: "Тег 1",
+            tagImage: "tag1.jpg",
+            tagImageAlt: "Тег 1 — изображение",
+            tagTitle: "Title тега 1",
+            tagDescription: "Описание тега 1",
+          },
+          {
+            tagSlug: "tag-2",
+            tagName: "Тег 2",
+            tagImage: "tag2.jpg",
+            tagImageAlt: "Тег 2 — изображение",
+            tagTitle: "Title тега 2",
+            tagDescription: "Описание тега 2",
+          },
+        ],
+      };
+
+      it("Ошибка сети при публикацие статьи", async () => {
+        mockFetch.mockRejectedValueOnce(new Error("Network Error"));
+
+        await expect(postArticle(mockPayload)).rejects.toThrow("Network Error");
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+      });
+
+      it("Успешная публикация статьи", async () => {
+        const mockResponse: IArticleResponse = {
+          ...mockPayload,
+          articleCategory: mockPayload.articleCategory as ICategoryData,
+          articleTags: mockPayload.articleTags as ITagData[],
+          _id: "abc123",
+          createdAt: "2025-11-01T00:00:00Z",
+          updatedAt: "2025-11-01T00:00:00Z",
+          articleReadingTime: "3 мин",
+        };
+
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: async () => mockResponse,
+        } as Response);
+
+        const res = await postArticle(mockPayload);
+
+        expect(res).toEqual(mockResponse);
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch).toHaveBeenCalledWith(
+          expect.stringMatching(/\/articles\/?$/),
+          expect.objectContaining({
+            method: "POST",
+            headers: expect.objectContaining({
+              "Content-Type": "application/json",
+            }),
+            body: JSON.stringify(mockPayload),
+          })
+        );
+      });
+
+      it("Сервер вернул !res.ok", async () => {
+        mockFetch.mockResolvedValueOnce({
+          ok: false,
+          status: 500,
+          statusText: "Internal Server Error",
+          text: async () => "Internal Server Error",
+          json: async () => ({}),
+        } as Response);
+
+        await expect(postArticle(mockPayload)).rejects.toThrow(
+          "Internal Server Error"
+        );
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe("getArticle", () => {
+      let articleSlug: string;
+
+      beforeEach(() => {
+        articleSlug = "articleslug";
+      });
+
+      it("Ошибка сети при получении статьи", async () => {
+        mockFetch.mockRejectedValueOnce(new Error("Network Error"));
+
+        await expect(getArticle(articleSlug)).rejects.toThrow("Network Error");
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+      });
+
+      it("Успешное получение статьи", async () => {
+        const mockArticle: IArticleResponse = {
+          _id: "abc123",
+          createdAt: "2025-11-01T00:00:00Z",
+          updatedAt: "2025-11-01T00:00:00Z",
+          articleReadingTime: "3 мин",
+          articleSlug: "test-slug",
+          articleTitle: "Test Title",
+          articleDescription: "Короткое описание для теста",
+          articleImg: "test.jpg",
+          articleImgAlt: "alt text",
+          articleH1: "Заголовок H1 для теста",
+          article: "Полный текст статьи для теста.",
+          articleCategory: {
+            categorySlug: "category-1",
+            categoryName: "Категория 1",
+            categoryImage: "category1.jpg",
+            categoryImageAlt: "Категория 1 — изображение",
+            categoryTitle: "Title категории 1",
+            categoryDescription: "Описание категории 1",
+          },
+          articleTags: [
+            {
+              tagSlug: "tag-1",
+              tagName: "Тег 1",
+              tagImage: "tag1.jpg",
+              tagImageAlt: "Тег 1 — изображение",
+              tagTitle: "Title тега 1",
+              tagDescription: "Описание тега 1",
+            },
+            {
+              tagSlug: "tag-2",
+              tagName: "Тег 2",
+              tagImage: "tag2.jpg",
+              tagImageAlt: "Тег 2 — изображение",
+              tagTitle: "Title тега 2",
+              tagDescription: "Описание тега 2",
+            },
+          ],
+        };
+
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: async () => mockArticle,
+        } as Response);
+
+        const res: IArticleResponse = await getArticle(articleSlug);
+
+        expect(res).toEqual(mockArticle);
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch).toHaveBeenCalledWith(
+          expect.stringMatching(/\/articles\/[^/]+$/),
+          expect.objectContaining({
+            method: "GET",
+            credentials: "include",
+            headers: expect.objectContaining({
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            }),
+          })
+        );
+      });
+
+      it("Сервер вернул !res.ok", async () => {
+        mockFetch.mockResolvedValueOnce({
+          ok: false,
+          status: 500,
+          statusText: "Internal Server Error",
+          text: async () => "Internal Server Error",
+          json: async () => ({}),
+        } as Response);
+
+        await expect(getArticle(articleSlug)).rejects.toThrow(
+          "Internal Server Error"
+        );
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe("getArticles", () => {
+      it("Ошибка сети при получении статей", async () => {
+        mockFetch.mockRejectedValueOnce(new Error("Network Error"));
+
+        await expect(getArticles()).rejects.toThrow("Network Error");
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+      });
+
+      it("Успешное получение статей", async () => {
+        const mockArticles: IArticleResponse[] = [
+          {
+            _id: "abc123",
+            createdAt: "2025-11-01T00:00:00Z",
+            updatedAt: "2025-11-01T00:00:00Z",
+            articleReadingTime: "3 мин",
+            articleSlug: "test-slug",
+            articleTitle: "Test Title",
+            articleDescription: "Короткое описание для теста",
+            articleImg: "test.jpg",
+            articleImgAlt: "alt text",
+            articleH1: "Заголовок H1 для теста",
+            article: "Полный текст статьи для теста.",
+            articleCategory: {
+              categorySlug: "category-1",
+              categoryName: "Категория 1",
+              categoryImage: "category1.jpg",
+              categoryImageAlt: "Категория 1 — изображение",
+              categoryTitle: "Title категории 1",
+              categoryDescription: "Описание категории 1",
+            },
+            articleTags: [
+              {
+                tagSlug: "tag-1",
+                tagName: "Тег 1",
+                tagImage: "tag1.jpg",
+                tagImageAlt: "Тег 1 — изображение",
+                tagTitle: "Title тега 1",
+                tagDescription: "Описание тега 1",
+              },
+              {
+                tagSlug: "tag-2",
+                tagName: "Тег 2",
+                tagImage: "tag2.jpg",
+                tagImageAlt: "Тег 2 — изображение",
+                tagTitle: "Title тега 2",
+                tagDescription: "Описание тега 2",
+              },
+            ],
+          },
+        ];
+
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: async () => mockArticles,
+        } as Response);
+
+        const res: IArticleResponse[] = await getArticles();
+
+        expect(res).toEqual(mockArticles);
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch).toHaveBeenCalledWith(
+          expect.stringMatching(/\/articles\/?$/),
+          expect.objectContaining({
+            method: "GET",
+            credentials: "include",
+            headers: expect.objectContaining({
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            }),
+          })
+        );
+      });
+
+      it("Сервер вернул !res.ok", async () => {
+        mockFetch.mockResolvedValueOnce({
+          ok: false,
+          status: 500,
+          statusText: "Internal Server Error",
+          text: async () => "Internal Server Error",
+          json: async () => ({}),
+        } as Response);
+
+        await expect(getArticles()).rejects.toThrow(
+          "Error: 500: Internal Server Error"
+        );
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe("getLastArticles", () => {
+      it("Ошибка сети при получении последних статей", async () => {
+        mockFetch.mockRejectedValueOnce(new Error("Network Error"));
+
+        await expect(getLastArticles()).rejects.toThrow("Network Error");
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+      });
+
+      it("Успешное получение последних статей", async () => {
+        const mockArticles: IArticleResponse[] = [
+          {
+            _id: "abc123",
+            createdAt: "2025-11-01T00:00:00Z",
+            updatedAt: "2025-11-01T00:00:00Z",
+            articleReadingTime: "3 мин",
+            articleSlug: "test-slug",
+            articleTitle: "Test Title",
+            articleDescription: "Короткое описание для теста",
+            articleImg: "test.jpg",
+            articleImgAlt: "alt text",
+            articleH1: "Заголовок H1 для теста",
+            article: "Полный текст статьи для теста.",
+            articleCategory: {
+              categorySlug: "category-1",
+              categoryName: "Категория 1",
+              categoryImage: "category1.jpg",
+              categoryImageAlt: "Категория 1 — изображение",
+              categoryTitle: "Title категории 1",
+              categoryDescription: "Описание категории 1",
+            },
+            articleTags: [
+              {
+                tagSlug: "tag-1",
+                tagName: "Тег 1",
+                tagImage: "tag1.jpg",
+                tagImageAlt: "Тег 1 — изображение",
+                tagTitle: "Title тега 1",
+                tagDescription: "Описание тега 1",
+              },
+              {
+                tagSlug: "tag-2",
+                tagName: "Тег 2",
+                tagImage: "tag2.jpg",
+                tagImageAlt: "Тег 2 — изображение",
+                tagTitle: "Title тега 2",
+                tagDescription: "Описание тега 2",
+              },
+            ],
+          },
+        ];
+
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: async () => mockArticles,
+        } as Response);
+
+        const res: IArticleResponse[] = await getLastArticles();
+
+        expect(res).toEqual(mockArticles);
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch).toHaveBeenCalledWith(
+          expect.stringMatching(/\/articles\/last\/?$/),
+          expect.objectContaining({
+            method: "GET",
+            credentials: "include",
+            headers: expect.objectContaining({
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            }),
+          })
+        );
+      });
+
+      it("Сервер вернул !res.ok", async () => {
+        mockFetch.mockResolvedValueOnce({
+          ok: false,
+          status: 500,
+          statusText: "Internal Server Error",
+          text: async () => "Internal Server Error",
+          json: async () => ({}),
+        } as Response);
+
+        await expect(getLastArticles()).rejects.toThrow(
+          "Error: 500: Internal Server Error"
+        );
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe("getCategoryArticles", () => {
+      let categoryArticleSlug: string;
+
+      beforeEach(() => {
+        categoryArticleSlug = "categoryArticleSlug";
+      });
+
+      it("Ошибка сети при получении статей категории", async () => {
+        mockFetch.mockRejectedValueOnce(new Error("Network Error"));
+
+        await expect(getCategoryArticles(categoryArticleSlug)).rejects.toThrow(
+          "Network Error"
+        );
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+      });
+
+      it("Успешное получение статей категории", async () => {
+        const mockCategoryArticles: IArticleResponse[] = [
+          {
+            _id: "abc123",
+            createdAt: "2025-11-01T00:00:00Z",
+            updatedAt: "2025-11-01T00:00:00Z",
+            articleReadingTime: "3 мин",
+            articleSlug: "test-slug",
+            articleTitle: "Test Title",
+            articleDescription: "Короткое описание для теста",
+            articleImg: "test.jpg",
+            articleImgAlt: "alt text",
+            articleH1: "Заголовок H1 для теста",
+            article: "Полный текст статьи для теста.",
+            articleCategory: {
+              categorySlug: "category-1",
+              categoryName: "Категория 1",
+              categoryImage: "category1.jpg",
+              categoryImageAlt: "Категория 1 — изображение",
+              categoryTitle: "Title категории 1",
+              categoryDescription: "Описание категории 1",
+            },
+            articleTags: [
+              {
+                tagSlug: "tag-1",
+                tagName: "Тег 1",
+                tagImage: "tag1.jpg",
+                tagImageAlt: "Тег 1 — изображение",
+                tagTitle: "Title тега 1",
+                tagDescription: "Описание тега 1",
+              },
+              {
+                tagSlug: "tag-2",
+                tagName: "Тег 2",
+                tagImage: "tag2.jpg",
+                tagImageAlt: "Тег 2 — изображение",
+                tagTitle: "Title тега 2",
+                tagDescription: "Описание тега 2",
+              },
+            ],
+          },
+        ];
+
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: async () => mockCategoryArticles,
+        } as Response);
+
+        const res: IArticleResponse[] = await getCategoryArticles(
+          categoryArticleSlug
+        );
+
+        expect(res).toEqual(mockCategoryArticles);
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch).toHaveBeenCalledWith(
+          expect.stringMatching(/\/articles\/categoryarticles\/[^/]+$/),
+          expect.objectContaining({
+            method: "GET",
+            credentials: "include",
+            headers: expect.objectContaining({
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            }),
+          })
+        );
+      });
+
+      it("Сервер вернул !res.ok", async () => {
+        mockFetch.mockResolvedValueOnce({
+          ok: false,
+          status: 500,
+          statusText: "Internal Server Error",
+          text: async () => "Internal Server Error",
+          json: async () => ({}),
+        } as Response);
+
+        await expect(getCategoryArticles(categoryArticleSlug)).rejects.toThrow(
+          "Error: 500: Internal Server Error"
+        );
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe("getTagArticles", () => {
+      let tagArticleSlug: string;
+
+      beforeEach(() => {
+        tagArticleSlug = "tagArticleSlug";
+      });
+
+      it("Ошибка сети при получении статей тэга", async () => {
+        mockFetch.mockRejectedValueOnce(new Error("Network Error"));
+
+        await expect(getTagArticles(tagArticleSlug)).rejects.toThrow(
+          "Network Error"
+        );
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+      });
+
+      it("Успешное получение статей тэга", async () => {
+        const mockTagArticles: IArticleResponse[] = [
+          {
+            _id: "abc123",
+            createdAt: "2025-11-01T00:00:00Z",
+            updatedAt: "2025-11-01T00:00:00Z",
+            articleReadingTime: "3 мин",
+            articleSlug: "test-slug",
+            articleTitle: "Test Title",
+            articleDescription: "Короткое описание для теста",
+            articleImg: "test.jpg",
+            articleImgAlt: "alt text",
+            articleH1: "Заголовок H1 для теста",
+            article: "Полный текст статьи для теста.",
+            articleCategory: {
+              categorySlug: "category-1",
+              categoryName: "Категория 1",
+              categoryImage: "category1.jpg",
+              categoryImageAlt: "Категория 1 — изображение",
+              categoryTitle: "Title категории 1",
+              categoryDescription: "Описание категории 1",
+            },
+            articleTags: [
+              {
+                tagSlug: "tag-1",
+                tagName: "Тег 1",
+                tagImage: "tag1.jpg",
+                tagImageAlt: "Тег 1 — изображение",
+                tagTitle: "Title тега 1",
+                tagDescription: "Описание тега 1",
+              },
+              {
+                tagSlug: "tag-2",
+                tagName: "Тег 2",
+                tagImage: "tag2.jpg",
+                tagImageAlt: "Тег 2 — изображение",
+                tagTitle: "Title тега 2",
+                tagDescription: "Описание тега 2",
+              },
+            ],
+          },
+        ];
+
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: async () => mockTagArticles,
+        } as Response);
+
+        const res: IArticleResponse[] = await getTagArticles(tagArticleSlug);
+
+        expect(res).toEqual(mockTagArticles);
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch).toHaveBeenCalledWith(
+          expect.stringMatching(/\/articles\/tagsarticles\/[^/]+$/),
+          expect.objectContaining({
+            method: "GET",
+            credentials: "include",
+            headers: expect.objectContaining({
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            }),
+          })
+        );
+      });
+
+      it("Сервер вернул !res.ok", async () => {
+        mockFetch.mockResolvedValueOnce({
+          ok: false,
+          status: 500,
+          statusText: "Internal Server Error",
+          text: async () => "Internal Server Error",
+          json: async () => ({}),
+        } as Response);
+
+        await expect(getTagArticles(tagArticleSlug)).rejects.toThrow(
+          "Error: 500: Internal Server Error"
+        );
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+      });
+    });
   });
 });

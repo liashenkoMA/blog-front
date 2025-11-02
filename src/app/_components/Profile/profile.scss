@@ -99,6 +99,11 @@
     object-fit: cover;
     border-radius: 16px;
     border: 1px solid v.$border-color;
+    @include m.hover {
+      transition-duration: 0.2s;
+      border: 1px solid v.$blue;
+      box-shadow: v.$shadow;
+    }
     @include m.media-1679 {
       width: 458px;
     }

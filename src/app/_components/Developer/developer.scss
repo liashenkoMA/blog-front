@@ -57,6 +57,10 @@
     border: 3px solid v.$light-blue;
     border-radius: 65px;
     box-shadow: v.$shadow;
+    @include m.hover {
+      transition-duration: 0.2s;
+      border: 2px solid v.$blue;
+    }
   }
 
   &__name {

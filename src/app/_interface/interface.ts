@@ -34,6 +34,7 @@ export interface IPostFileResponse {
 export interface ILoginResponse {
   access_token?: string;
   error?: string;
+  message?: string;
 }
 
 // ==== ARTICLE ====

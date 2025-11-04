@@ -9,6 +9,11 @@ jest.mock("next/headers", () => ({
   })),
 }));
 
+interface FormData {
+  email: string;
+  password: string;
+}
+
 describe("login Api", () => {
   const mockFetch = fetch as jest.MockedFunction<typeof fetch>;
   let formData: FormData;
@@ -16,9 +21,10 @@ describe("login Api", () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    formData = new FormData();
-    formData.set("email", "test@email.ru");
-    formData.set("password", "password");
+    formData = {
+      email: "test@email.ru",
+      password: "test",
+    };
   });
 
   it("Ошибка сети при авторизации", async () => {
@@ -43,7 +49,10 @@ describe("login Api", () => {
       "token",
       expect.objectContaining({ httpOnly: true })
     );
-    expect(result).toBeUndefined();
+    expect(result).toEqual({
+      error: undefined,
+      message: undefined,
+    });
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(mockFetch).toHaveBeenCalledWith(
       expect.stringMatching(/\/auth\/signin$/),
@@ -56,7 +65,7 @@ describe("login Api", () => {
         }),
         body: JSON.stringify({
           email: "test@email.ru",
-          password: "password",
+          password: "test",
         }),
       })
     );
@@ -66,12 +75,18 @@ describe("login Api", () => {
     mockFetch.mockResolvedValueOnce({
       ok: false,
       status: 401,
-      json: async () => ({ error: "Почта или пароль не верные" }),
+      json: async () => ({
+        error: "Unauthorized",
+        message: "Почта или пароль не верные",
+      }),
     } as Response);
 
     const res = await login(formData);
 
-    expect(res).toBe("Почта или пароль не верные");
+    expect(res).toEqual({
+      error: "Unauthorized",
+      message: "Почта или пароль не верные",
+    });
     expect(mockFetch).toHaveBeenCalledTimes(1);
   });
 });

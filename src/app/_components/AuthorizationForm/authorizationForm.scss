@@ -11,6 +11,12 @@
     gap: 30px;
   }
 
+  &__form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
   &__input {
     min-width: 421px;
     padding: 15px;
@@ -24,6 +30,19 @@
   &__input:focus {
     outline: none;
     border: 1px solid v.$blue;
+  }
+
+  &__input-error {
+    max-width: 421px;
+    color: v.$red;
+    @include m.text-fontsize-xx-small;
+  }
+
+  &__form-submit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
 
   &__btn {
@@ -41,5 +60,11 @@
       cursor: pointer;
       box-shadow: v.$shadow;
     }
+  }
+
+  &__form-error {
+    max-width: 421px;
+    color: v.$red;
+    @include m.text-fontsize-xx-small;
   }
 }

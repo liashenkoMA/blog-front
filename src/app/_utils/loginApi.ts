@@ -1,3 +1,5 @@
+"use server";
+
 import { cookies } from "next/headers";
 import { ILoginResponse } from "../_interface/interface";
 
@@ -9,9 +11,11 @@ const auth = {
   },
 };
 
-export async function login(formData: FormData): Promise<string | undefined> {
-  const email = formData.get("email");
-  const password = formData.get("password");
+export async function login(formData: {
+  email: string;
+  password: string;
+}): Promise<{ error?: string; message?: string }> {
+  const { email, password } = formData;
 
   try {
     const res = await fetch(`${auth.baseUrl}/auth/signin`, {
@@ -35,7 +39,7 @@ export async function login(formData: FormData): Promise<string | undefined> {
       });
     }
 
-    return data.error;
+    return { error: data.error, message: data.message };
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }

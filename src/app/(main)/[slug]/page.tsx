@@ -13,11 +13,17 @@ import {
 } from "@/app/_utils/articleApi";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { ICategoryResponse, ITagResponse } from "@/app/_interface/interface";
+import {
+  IArticlesPageResponse,
+  ICategoryResponse,
+  ITagResponse,
+} from "@/app/_interface/interface";
+import Pagination from "@/app/_components/Pagination/Pagination";
 
-async function loadCategoryOrTag(
-  slug: string
-): Promise<{ type: "category" | "tag"; data: ICategoryResponse | ITagResponse }> {
+async function loadCategoryOrTag(slug: string): Promise<{
+  type: "category" | "tag";
+  data: ICategoryResponse | ITagResponse;
+}> {
   const [categoryResult, tagResult] = await Promise.allSettled([
     getCategory(slug),
     getTag(slug),
@@ -54,15 +60,22 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+interface IPageProps {
+  params: { slug: string };
+  searchParams?: { page?: string };
+}
+
+export default async function Page({ params, searchParams }: IPageProps) {
   const awaitedParams = await params;
+  const awaitedSearchParams = await searchParams;
 
   const { type, data } = await loadCategoryOrTag(awaitedParams.slug);
+  const page = Number(awaitedSearchParams?.page) || 1;
 
-  const articles =
+  const articlesPage: IArticlesPageResponse =
     type === "category"
-      ? await getCategoryArticles(awaitedParams.slug)
-      : await getTagArticles(awaitedParams.slug);
+      ? await getCategoryArticles(awaitedParams.slug, page)
+      : await getTagArticles(awaitedParams.slug, page);
 
   return (
     <div className="category">
@@ -85,9 +98,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
       />
       <div className="category__container">
         <main className="category__content">
-          {articles.map((article) => (
+          {articlesPage.articles.map((article) => (
             <PageCard key={article._id} page={article} />
           ))}
+          <Pagination
+            total={articlesPage.totalCount}
+            slug={awaitedParams.slug}
+          />
         </main>
         <Sidebar />
       </div>

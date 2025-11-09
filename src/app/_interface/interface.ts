@@ -64,6 +64,11 @@ export interface IArticleResponse extends IArticleData {
   articleReadingTime: string;
 }
 
+export interface IArticlesPageResponse {
+  articles: IArticleResponse[];
+  totalCount: number;
+}
+
 export interface ICategoryData {
   categorySlug: string;
   categoryName: string;

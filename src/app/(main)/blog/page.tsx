@@ -8,14 +8,23 @@ import Sidebar from "@/app/_components/Sidebar/Sidebar";
 import { Metadata } from "next";
 import Pagination from "@/app/_components/Pagination/Pagination";
 
+interface ISearchParams {
+  searchParams?: { page?: string };
+}
+
 export const metadata: Metadata = {
   title: "Блог",
   description:
     "На этой странице вы можете найти все доступные на данный момент статьи моего блога. Надеюсь они вам понравятся.",
 };
 
-export default async function Page() {
-  const [articles, user] = await Promise.all([getArticles(), getUserData()]);
+export default async function Page({ searchParams }: ISearchParams) {
+  const awaitedSearchParams = await searchParams;
+  const page = Number(awaitedSearchParams?.page) || 1;
+  const [articles, user] = await Promise.all([
+    getArticles(page),
+    getUserData(),
+  ]);
 
   return (
     <div className="blog">
@@ -26,10 +35,10 @@ export default async function Page() {
       />
       <div className="blog__container">
         <main className="blog__content">
-          {articles.map((article) => (
+          {articles.articles.map((article) => (
             <PageCard key={article._id} page={article} />
           ))}
-          <Pagination total={10} slug={"/blog"} />
+          <Pagination total={articles.totalCount} slug={"/blog"} />
         </main>
         <Sidebar />
       </div>

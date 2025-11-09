@@ -32,12 +32,22 @@ export default function Pagination({ total, slug }: IPaginationProps) {
   return (
     <nav className="pagination">
       <ol className="pagination__lists">
-        <li className="pagination__list">
-          <Link
-            href={count - 1 <= 1 ? `${slug}` : `${slug}?page=${count - 1}`}
-            className="pagination__btn pagination__btn_left"
-          ></Link>
-        </li>
+        {count === 1 ? (
+          <li className="pagination__list">
+            <button
+              type="button"
+              disabled
+              className="pagination__btn pagination__btn_left"
+            ></button>
+          </li>
+        ) : (
+          <li className="pagination__list">
+            <Link
+              href={count - 1 <= 1 ? `${slug}` : `${slug}?page=${count - 1}`}
+              className="pagination__btn pagination__btn_left"
+            ></Link>
+          </li>
+        )}
 
         {pages <= 5 ? (
           countPages.map((el) => (
@@ -107,16 +117,26 @@ export default function Pagination({ total, slug }: IPaginationProps) {
           </>
         )}
 
-        <li className="pagination__list">
-          <Link
-            href={
-              count < pages
-                ? `${slug}?page=${count + 1}`
-                : `${slug}?page=${pages}`
-            }
-            className="pagination__btn pagination__btn_right"
-          ></Link>
-        </li>
+        {count === pages ? (
+          <li className="pagination__list">
+            <button
+              type="button"
+              disabled
+              className="pagination__btn pagination__btn_right"
+            ></button>
+          </li>
+        ) : (
+          <li className="pagination__list">
+            <Link
+              href={
+                count < pages
+                  ? `${slug}?page=${count + 1}`
+                  : `${slug}?page=${pages}`
+              }
+              className="pagination__btn pagination__btn_right"
+            ></Link>
+          </li>
+        )}
       </ol>
     </nav>
   );

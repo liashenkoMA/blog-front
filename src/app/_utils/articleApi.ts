@@ -1,6 +1,7 @@
 import {
   IArticlePayload,
   IArticleResponse,
+  IArticlesPageResponse,
   ICategoryResponse,
   ITagResponse,
 } from "../_interface/interface";
@@ -19,8 +20,6 @@ async function checkResponse<T>(res: Response): Promise<T> {
 }
 
 // === CATEGORY ===
-
-export async function postCategory() {}
 
 export async function getCategory(
   categorySlug: string
@@ -136,9 +135,11 @@ export async function getArticle(
   }
 }
 
-export async function getArticles(): Promise<IArticleResponse[]> {
+export async function getArticles(
+  page: number
+): Promise<IArticlesPageResponse> {
   try {
-    const res = await fetch(`${address.baseUrl}/articles/`, {
+    const res = await fetch(`${address.baseUrl}/articles?page=${page}`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -147,7 +148,7 @@ export async function getArticles(): Promise<IArticleResponse[]> {
       },
     });
 
-    return checkResponse<IArticleResponse[]>(res);
+    return checkResponse<IArticlesPageResponse>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }
@@ -171,11 +172,12 @@ export async function getLastArticles(): Promise<IArticleResponse[]> {
 }
 
 export async function getCategoryArticles(
-  categorySlug: string
-): Promise<IArticleResponse[]> {
+  categorySlug: string,
+  page: number
+): Promise<IArticlesPageResponse> {
   try {
     const res = await fetch(
-      `${address.baseUrl}/articles/categoryarticles/${categorySlug}`,
+      `${address.baseUrl}/articles/categoryarticles/${categorySlug}?page=${page}`,
       {
         method: "GET",
         credentials: "include",
@@ -186,18 +188,19 @@ export async function getCategoryArticles(
       }
     );
 
-    return checkResponse<IArticleResponse[]>(res);
+    return checkResponse<IArticlesPageResponse>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }
 }
 
 export async function getTagArticles(
-  tagSlug: string
-): Promise<IArticleResponse[]> {
+  tagSlug: string,
+  page: number
+): Promise<IArticlesPageResponse> {
   try {
     const res = await fetch(
-      `${address.baseUrl}/articles/tagsarticles/${tagSlug}`,
+      `${address.baseUrl}/articles/tagsarticles/${tagSlug}?page=${page}`,
       {
         method: "GET",
         credentials: "include",
@@ -208,7 +211,7 @@ export async function getTagArticles(
       }
     );
 
-    return checkResponse<IArticleResponse[]>(res);
+    return checkResponse<IArticlesPageResponse>(res);
   } catch (err) {
     throw new Error((err as Error).message || "Неизвестная ошибка");
   }

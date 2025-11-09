@@ -1,6 +1,7 @@
 import {
   IArticlePayload,
   IArticleResponse,
+  IArticlesPageResponse,
   ICategoryData,
   ICategoryResponse,
   ITagData,
@@ -492,7 +493,7 @@ describe("article Api", () => {
       it("Ошибка сети при получении статей", async () => {
         mockFetch.mockRejectedValueOnce(new Error("Network Error"));
 
-        await expect(getArticles()).rejects.toThrow("Network Error");
+        await expect(getArticles(1)).rejects.toThrow("Network Error");
         expect(mockFetch).toHaveBeenCalledTimes(1);
       });
 
@@ -539,17 +540,25 @@ describe("article Api", () => {
           },
         ];
 
+        const mockTotalCount = 6;
+
         mockFetch.mockResolvedValueOnce({
           ok: true,
-          json: async () => mockArticles,
+          json: async () => ({
+            articles: mockArticles,
+            totalCount: mockTotalCount,
+          }),
         } as Response);
 
-        const res: IArticleResponse[] = await getArticles();
+        const res: IArticlesPageResponse = await getArticles(1);
 
-        expect(res).toEqual(mockArticles);
+        expect(res).toEqual({
+          articles: mockArticles,
+          totalCount: mockTotalCount,
+        });
         expect(mockFetch).toHaveBeenCalledTimes(1);
         expect(mockFetch).toHaveBeenCalledWith(
-          expect.stringMatching(/\/articles\/?$/),
+          expect.stringMatching(/\/articles\/?(\?page=\d+)?$/),
           expect.objectContaining({
             method: "GET",
             credentials: "include",
@@ -570,7 +579,7 @@ describe("article Api", () => {
           json: async () => ({}),
         } as Response);
 
-        await expect(getArticles()).rejects.toThrow(
+        await expect(getArticles(1)).rejects.toThrow(
           "Error: 500: Internal Server Error"
         );
         expect(mockFetch).toHaveBeenCalledTimes(1);

@@ -1,0 +1,58 @@
+@use "../../variables" as v;
+@use "../../mixins" as m;
+
+.pagination {
+  margin: 0 auto;
+
+  &__lists {
+    list-style: none;
+    display: flex;
+    gap: 5px;
+  }
+
+  &__list {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &__text {
+    color: v.$white;
+  }
+
+  &__btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid v.$border-color;
+    background-color: v.$background-element-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include m.text-fontsize-x-small;
+    color: v.$white;
+    @include m.hover {
+      cursor: pointer;
+      border-color: v.$blue;
+      box-shadow: v.$shadow;
+      transform: translateY(-2px);
+      transition-duration: 0.2s;
+    }
+  }
+
+  &__btn_type_active {
+    border-color: v.$blue;
+    box-shadow: v.$shadow;
+  }
+
+  &__btn_left {
+    background-image: url(../../_images/arrow-left.png);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &__btn_right {
+    background-image: url(../../_images/arrow-right.png);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}

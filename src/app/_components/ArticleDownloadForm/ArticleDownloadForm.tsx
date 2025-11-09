@@ -156,6 +156,7 @@ export default function ArticleDownloadForm() {
       setTagData((tagData) => ({ ...tagData, [name]: value }));
     }
   }
+  
   function handleTagSelect(e: React.ChangeEvent<HTMLSelectElement>) {
     const selectValues = Array.from(
       e.target.selectedOptions,

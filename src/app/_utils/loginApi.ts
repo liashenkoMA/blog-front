@@ -30,12 +30,14 @@ export async function login(formData: {
 
     const data: ILoginResponse = await res.json();
 
-    const expires = new Date(Date.now() + 1000 * 1000);
+    const expires = new Date(Date.now() + 60 * 60 * 1000);
 
     if (data.access_token) {
       (await cookies()).set("session", data.access_token, {
         expires,
         httpOnly: true,
+        secure: true,
+        sameSite: "lax",
       });
     }
 

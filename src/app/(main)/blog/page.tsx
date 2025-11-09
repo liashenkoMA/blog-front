@@ -6,6 +6,7 @@ import PageCard from "@/app/_components/PageCard/PageCard";
 import PageHeader from "@/app/_components/PageHeader/PageHeader";
 import Sidebar from "@/app/_components/Sidebar/Sidebar";
 import { Metadata } from "next";
+import Pagination from "@/app/_components/Pagination/Pagination";
 
 export const metadata: Metadata = {
   title: "Блог",
@@ -28,6 +29,7 @@ export default async function Page() {
           {articles.map((article) => (
             <PageCard key={article._id} page={article} />
           ))}
+          <Pagination total={10} slug={"/blog"} />
         </main>
         <Sidebar />
       </div>

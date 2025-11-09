@@ -685,9 +685,9 @@ describe("article Api", () => {
       it("Ошибка сети при получении статей категории", async () => {
         mockFetch.mockRejectedValueOnce(new Error("Network Error"));
 
-        await expect(getCategoryArticles(categoryArticleSlug)).rejects.toThrow(
-          "Network Error"
-        );
+        await expect(
+          getCategoryArticles(categoryArticleSlug, 1)
+        ).rejects.toThrow("Network Error");
         expect(mockFetch).toHaveBeenCalledTimes(1);
       });
 
@@ -734,19 +734,28 @@ describe("article Api", () => {
           },
         ];
 
+        const mockTotalCount = 6;
+
         mockFetch.mockResolvedValueOnce({
           ok: true,
-          json: async () => mockCategoryArticles,
+          json: async () => ({
+            articles: mockCategoryArticles,
+            totalCount: mockTotalCount,
+          }),
         } as Response);
 
-        const res: IArticleResponse[] = await getCategoryArticles(
-          categoryArticleSlug
+        const res: IArticlesPageResponse = await getCategoryArticles(
+          categoryArticleSlug,
+          1
         );
 
-        expect(res).toEqual(mockCategoryArticles);
+        expect(res).toEqual({
+          articles: mockCategoryArticles,
+          totalCount: mockTotalCount,
+        });
         expect(mockFetch).toHaveBeenCalledTimes(1);
         expect(mockFetch).toHaveBeenCalledWith(
-          expect.stringMatching(/\/articles\/categoryarticles\/[^/]+$/),
+          expect.stringMatching(/articles\/categoryarticles\/[^/]+\?page=\d+$/),
           expect.objectContaining({
             method: "GET",
             credentials: "include",
@@ -767,9 +776,9 @@ describe("article Api", () => {
           json: async () => ({}),
         } as Response);
 
-        await expect(getCategoryArticles(categoryArticleSlug)).rejects.toThrow(
-          "Error: 500: Internal Server Error"
-        );
+        await expect(
+          getCategoryArticles(categoryArticleSlug, 1)
+        ).rejects.toThrow("Error: 500: Internal Server Error");
         expect(mockFetch).toHaveBeenCalledTimes(1);
       });
     });
@@ -784,7 +793,7 @@ describe("article Api", () => {
       it("Ошибка сети при получении статей тэга", async () => {
         mockFetch.mockRejectedValueOnce(new Error("Network Error"));
 
-        await expect(getTagArticles(tagArticleSlug)).rejects.toThrow(
+        await expect(getTagArticles(tagArticleSlug, 1)).rejects.toThrow(
           "Network Error"
         );
         expect(mockFetch).toHaveBeenCalledTimes(1);
@@ -833,17 +842,28 @@ describe("article Api", () => {
           },
         ];
 
+        const mockTotalCount = 6;
+
         mockFetch.mockResolvedValueOnce({
           ok: true,
-          json: async () => mockTagArticles,
+          json: async () => ({
+            articles: mockTagArticles,
+            totalCount: mockTotalCount,
+          }),
         } as Response);
 
-        const res: IArticleResponse[] = await getTagArticles(tagArticleSlug);
+        const res: IArticlesPageResponse = await getTagArticles(
+          tagArticleSlug,
+          1
+        );
 
-        expect(res).toEqual(mockTagArticles);
+        expect(res).toEqual({
+          articles: mockTagArticles,
+          totalCount: mockTotalCount,
+        });
         expect(mockFetch).toHaveBeenCalledTimes(1);
         expect(mockFetch).toHaveBeenCalledWith(
-          expect.stringMatching(/\/articles\/tagsarticles\/[^/]+$/),
+          expect.stringMatching(/articles\/tagsarticles\/[^/]+\?page=\d+$/),
           expect.objectContaining({
             method: "GET",
             credentials: "include",
@@ -864,7 +884,7 @@ describe("article Api", () => {
           json: async () => ({}),
         } as Response);
 
-        await expect(getTagArticles(tagArticleSlug)).rejects.toThrow(
+        await expect(getTagArticles(tagArticleSlug, 1)).rejects.toThrow(
           "Error: 500: Internal Server Error"
         );
         expect(mockFetch).toHaveBeenCalledTimes(1);

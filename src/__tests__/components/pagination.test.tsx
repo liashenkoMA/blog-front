@@ -31,6 +31,7 @@ describe("Pagination", () => {
     render(<Pagination total={24} slug="/blog" />);
     expect(screen.getByText("2")).toBeInTheDocument();
     expect(screen.getByText("4")).toBeInTheDocument();
+    expect(screen.queryByText(". . .")).not.toBeInTheDocument();
   });
 
   it("Рендерится при page > 5", () => {

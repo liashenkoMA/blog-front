@@ -36,6 +36,7 @@ export default function Pagination({ total, slug }: IPaginationProps) {
           <li className="pagination__list">
             <button
               type="button"
+              name="button-left"
               disabled
               className="pagination__btn pagination__btn_left"
             ></button>
@@ -45,6 +46,7 @@ export default function Pagination({ total, slug }: IPaginationProps) {
             <Link
               href={count - 1 <= 1 ? `${slug}` : `${slug}?page=${count - 1}`}
               className="pagination__btn pagination__btn_left"
+              data-testid="button-left-link"
             ></Link>
           </li>
         )}
@@ -122,6 +124,7 @@ export default function Pagination({ total, slug }: IPaginationProps) {
             <button
               type="button"
               disabled
+              name="button-right"
               className="pagination__btn pagination__btn_right"
             ></button>
           </li>
@@ -134,6 +137,7 @@ export default function Pagination({ total, slug }: IPaginationProps) {
                   : `${slug}?page=${pages}`
               }
               className="pagination__btn pagination__btn_right"
+              data-testid="button-right-link"
             ></Link>
           </li>
         )}

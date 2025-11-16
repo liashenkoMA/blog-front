@@ -105,10 +105,10 @@ const components = {
 
     return (
       <Image
-        src={src}
+        src={src as string}
         alt={alt ?? ""}
-        width={width ? Number(width) : 800} // дефолтная ширина
-        height={height ? Number(height) : 600} // дефолтная высота
+        width={width ? Number(width) : 800}
+        height={height ? Number(height) : 600}
         className="article__img"
       />
     );

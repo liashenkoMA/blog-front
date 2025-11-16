@@ -2,7 +2,7 @@ import "./article.scss";
 
 import Sidebar from "@/app/_components/Sidebar/Sidebar";
 import Image from "next/image";
-import { getArticle, getArticles } from "@/app/_utils/articleApi";
+import { getAllArticles, getArticle } from "@/app/_utils/articleApi";
 import { notFound } from "next/navigation";
 import ArticleHeader from "@/app/_components/ArticleHeader/ArticleHeader";
 import { IArticleResponse } from "@/app/_interface/interface";
@@ -64,9 +64,9 @@ export default async function Page({
 }
 
 export async function generateStaticParams() {
-  const articles = await getArticles();
+  const articles = await getAllArticles();
 
-  return articles.map((article: IArticleResponse) => ({
+  return articles.articles.map((article: IArticleResponse) => ({
     category: article.articleCategory.categorySlug,
     article: article.articleSlug,
   }));
